@@ -2,24 +2,41 @@
 
 const https = require('https');
 const express = require("express");
-const app = express();
-const router = express.Router();
-const utils = require('./utils.js')
+const utils = require('./utils.js');
 
-const path = __dirname + '/views/';
+const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;
 const tenorKey = process.env.TENOR_GIF_API_KEY;
+
+const app = express();
+const router = express.Router();
+
 let activeResponse = undefined;
 let posicaoAtual = 1;
+
+/*
+================================
+MIDDLEWARES
+================================
+*/
+
+app.use(express.static(viewsPath));
+app.use("/", router);
 
 router.use(function (req, res, next) {
   console.log("/" + req.method);
   next();
 });
 
+/*
+================================
+ROTAS
+================================
+*/
+
 router.get("/", function (req, res) {
-  console.log(path + "index/index.html");
-  res.sendFile(path + "index/index.html");
+  console.log(viewsPath + "index/index.html");
+  res.sendFile(viewsPath + "index/index.html");
 });
 
 router.get("/stream", function (req, res) {
@@ -78,9 +95,6 @@ router.get("/random", function (req, res) {
 function send(data) {
   activeResponse.write(`data: ${data}\n\n`);
 }
-
-app.use(express.static(path));
-app.use("/", router);
 
 app.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`)
