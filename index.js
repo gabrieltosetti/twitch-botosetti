@@ -30,7 +30,7 @@ router.get("/stream", function (req, res) {
 router.get("/random", function (req, res) {
   gifPos = getRandomGifPos(1, 100);
 
-  https.get(`https://g.tenor.com/v1/search?key=${tenorKey}&locale=pt_BR&q=penis&limit=1&pos=${gifPos}`, (getRes) => {
+  https.get(`https://g.tenor.com/v1/search?key=${tenorKey}&locale=pt_BR&q=fail&limit=1&pos=${gifPos}&contentfilter=high`, (getRes) => {
     const { statusCode } = getRes;
     const contentType = getRes.headers['content-type'];
 
