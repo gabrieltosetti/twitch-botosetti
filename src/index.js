@@ -4,12 +4,13 @@ const https = require('https');
 const express = require("express");
 const app = express();
 const router = express.Router();
+const utils = require('./utils.js')
 
 const path = __dirname + '/views/';
 const PORT = process.env.PORT || 80;
 const tenorKey = process.env.TENOR_GIF_API_KEY;
 let activeResponse = undefined;
-let gifPos = 1;
+let posicaoAtual = 1;
 
 router.use(function (req, res, next) {
   console.log("/" + req.method);
@@ -17,7 +18,8 @@ router.use(function (req, res, next) {
 });
 
 router.get("/", function (req, res) {
-  res.sendFile(path + "index.html");
+  console.log(path + "index/index.html");
+  res.sendFile(path + "index/index.html");
 });
 
 router.get("/stream", function (req, res) {
@@ -28,9 +30,9 @@ router.get("/stream", function (req, res) {
 
 
 router.get("/random", function (req, res) {
-  gifPos = getRandomGifPos(1, 100);
+  posicaoAtual = utils.getRandomGifPos(posicaoAtual, 1, 100);
 
-  https.get(`https://g.tenor.com/v1/search?key=${tenorKey}&locale=pt_BR&q=fail&limit=1&pos=${gifPos}&contentfilter=high`, (getRes) => {
+  https.get(`https://g.tenor.com/v1/search?key=${tenorKey}&locale=pt_BR&q=fail&limit=1&pos=${posicaoAtual}&contentfilter=high`, (getRes) => {
     const { statusCode } = getRes;
     const contentType = getRes.headers['content-type'];
 
@@ -60,10 +62,10 @@ router.get("/random", function (req, res) {
         const parsedData = JSON.parse(rawData);
         const gifUrl = parsedData.results[0].media[0].gif.url;
         console.log(gifUrl);
-        
+
         send(gifUrl);
 
-        res.send({msg: "Gif enviado"});
+        res.send({ msg: "Gif enviado" });
       } catch (e) {
         console.error(e.message);
       }
@@ -83,26 +85,3 @@ app.use("/", router);
 app.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`)
 })
-
-/**
- * Returns a random integer between min (inclusive) and max (inclusive).
- * The value is no lower than min (or the next integer greater than min
- * if min isn't an integer) and no greater than max (or the next integer
- * lower than max if max isn't an integer).
- * Using Math.round() will give you a non-uniform distribution!
- */
- function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-function getRandomGifPos(min, max) {
-  let randomPos = getRandomInt(min, max);
-
-  if (randomPos === gifPos) {
-    return getRandomGifPos(min, max);
-  }
-
-  return randomPos;
-}

@@ -15,7 +15,7 @@ services:
     volumes:
       - .:/home/node/app
       - node_modules:/home/node/app/node_modules
-    command: /home/node/app/node_modules/.bin/nodemon index.js
+    command: /home/node/app/node_modules/.bin/nodemon src/index.js
 
 volumes:
   node_modules:
