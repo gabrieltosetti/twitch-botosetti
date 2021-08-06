@@ -1,17 +1,17 @@
 'use strict';
 
-const https = require('https');
-const express = require("express");
-const utils = require('./utils.js');
-
 const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;
 const tenorKey = process.env.TENOR_GIF_API_KEY;
 
+const https = require('https');
+const express = require("express");
+const utils = require('./utils.js');
+const twitchBot = require('./twitch/connect');
+
 const app = express();
 const router = express.Router();
 
-let activeResponse = undefined;
 let posicaoAtual = 1;
 
 /*
@@ -42,7 +42,7 @@ router.get("/", function (req, res) {
 router.get("/stream", function (req, res) {
   res.setHeader('Content-Type', 'text/event-stream');
 
-  activeResponse = res;
+  utils.activeResponse = res;
 });
 
 
@@ -80,7 +80,7 @@ router.get("/random", function (req, res) {
         const gifUrl = parsedData.results[0].media[0].gif.url;
         console.log(gifUrl);
 
-        send(gifUrl);
+        utils.responseWrite(gifUrl);
 
         res.send({ msg: "Gif enviado" });
       } catch (e) {
@@ -91,10 +91,6 @@ router.get("/random", function (req, res) {
     console.error(`Got error: ${e.message}`);
   });
 });
-
-function send(data) {
-  activeResponse.write(`data: ${data}\n\n`);
-}
 
 app.listen(PORT, function () {
   console.log(`Example app listening on port ${PORT}!`)
