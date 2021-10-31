@@ -1,12 +1,30 @@
-#gif-wrap {
+#gif-wrapper {
+    min-width: 100%;
+    min-height: 100vh;
+    position: relative;
+}
+
+.gif {
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center;
     z-index: -1;
-  }
+    height: 300px;
+    width: 300px;
+    opacity: 0.6;
+}
+
+.go-up {
+    -webkit-animation: goUp 6s  normal ease-out forwards;
+    animation: goUp 6s  normal ease-out forwards;
+}
+
+@keyframes goUp {
+    0% {
+        top: 100vh;
+    }
+    100% {
+        top: -50vh;
+    }
+}

@@ -7,7 +7,7 @@ const tenorKey = process.env.TENOR_GIF_API_KEY;
 
 let posicaoAtual = 1;
 
-// Define configuration options
+// Define configuration options 
 const opts = {
   identity: {
     username: process.env.BOT_NAME,
@@ -30,12 +30,17 @@ client.connect();
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
-//   if (self) { return; } // Ignore messages from the bot
+  if (self) { return; } // Ignore messages from the bot
 
   const commandName = msg.trim();
 
+  if (commandName === '!gif') {
+    client.say(target, `Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
+  }
+
   // If the command is known, let's execute it
   if (commandName.indexOf('!gif ') === 0) {
+
     let pesquisaGif = commandName.substring(5);
 
     // client.say(target, `Voce pediu o gif ${pesquisaGif}`);

@@ -1,4 +1,6 @@
 'use strict';
+require('dotenv').config()
+
 
 const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;

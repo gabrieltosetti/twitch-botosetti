@@ -16,7 +16,7 @@ exports.getRandomGifPos = function (posicaoAtual, min, max) {
     let posicaoAleatoria = this.getRandomInt(min, max);
 
     if (posicaoAleatoria === posicaoAtual) {
-        return this.getRandomGifPos(min, max);
+        return this.getRandomGifPos(posicaoAleatoria, min, max);
     }
 
     return posicaoAleatoria;
