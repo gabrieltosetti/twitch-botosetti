@@ -1,7 +1,6 @@
 'use strict';
 require('dotenv').config()
 require('./twitch/connect');
-const runner = require('./Runners/StardewValleyRunner');
 
 
 const viewsPath = __dirname + '/views/';
