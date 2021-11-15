@@ -26,12 +26,13 @@ client.on('message', onMessageHandler);
 client.on('connected', onConnectedHandler);
 
 // Connect to Twitch:
-// client.connect();
+client.connect();
 
 // Called every time a message comes in
 function onMessageHandler (target, context, msg, self) {
   if (self) { return; } // Ignore messages from the bot
 
+  // TODO: str to lower
   const commandName = msg.trim();
 
   if (commandName === '!gif') {
