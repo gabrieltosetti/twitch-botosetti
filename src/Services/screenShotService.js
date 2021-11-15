@@ -8,5 +8,6 @@ exports.saveScreenShotFromPrimaryDisplay = async function(imagePath) {
     };
 
     await screenshot(screenOptions);
+    console.log('print!');
     return;
 };
