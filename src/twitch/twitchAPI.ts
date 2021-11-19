@@ -3,7 +3,7 @@ const axios = require('axios').default;
 const channelID = process.env.CHANNEL_ID;
 const oauthToken = process.env.BOT_OAUTH_TOKEN_ONLY_KEY;
 
-exports.setStreamTitle = async function(newChanelTitle) {
+export const setStreamTitle = async function(newChanelTitle: string) {
     try {
         const res = await axios.put(
             'https://api.twitch.tv/kraken/channels/' + channelID,
@@ -24,7 +24,7 @@ exports.setStreamTitle = async function(newChanelTitle) {
     }
 };
 
-exports.getChannel = async function(newChanelTitle) {
+export const getChannel = async function() {
     try {
         const res = await axios.get(
             'https://api.twitch.tv/kraken/channels/' + channelID,

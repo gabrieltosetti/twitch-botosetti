@@ -1,13 +1,13 @@
 'use strict';
 require('dotenv').config()
-require('./twitch/connect');
+// require('./twitch/connect');
 
 
 const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;
 
-const express = require("express");
-const utils = require('./utils.js');
+import express from 'express';
+import Utils from './utils';
 
 const app = express();
 const router = express.Router();
@@ -18,6 +18,7 @@ MIDDLEWARES
 ================================
 */
 
+app.use(express.json());
 app.use(express.static(viewsPath));
 app.use("/", router);
 
@@ -40,7 +41,7 @@ router.get("/", function (req, res) {
 router.get("/stream", function (req, res) {
     res.setHeader('Content-Type', 'text/event-stream');
 
-    utils.activeResponse = res;
+    Utils.activeResponse = res;
 });
 
 

@@ -1,9 +1,9 @@
-const ocr = require('./ocrService');
-const path = require('path');
-const twitchAPI = require('../twitch/twitchAPI');
-const screenShot = require('./screenShotService');
+import * as Ocr from './ocrService';
+import path from 'path';
+import * as twitchAPI from '../twitch/twitchAPI';
+import * as screenShot from './screenShotService';
 
-exports.updateStreamTitleByInGameDaysCount = async function () {
+export const updateStreamTitleByInGameDaysCount = async function () {
     console.log('-------------------------------');
     const imagePath = await getScreenShot();
 
@@ -44,7 +44,7 @@ async function getScreenShot() {
     return imagePath;
 }
 
-function getTextFromImage(imagePath) {
+function getTextFromImage(imagePath: string) {
     const area = {
         left: 1820,
         top: 29,
@@ -52,7 +52,7 @@ function getTextFromImage(imagePath) {
         height: 41,
     };
 
-    return ocr.getTextFromImage(imagePath, area);
+    return Ocr.getTextFromImage(imagePath, area);
 }
 
 async function getStreamTitle() {
@@ -60,11 +60,11 @@ async function getStreamTitle() {
     return channelData.status;
 }
 
-function setStreamTitle(newStreamTitle) {
+function setStreamTitle(newStreamTitle: string) {
     return twitchAPI.setStreamTitle(newStreamTitle);
 }
 
-function getNewChannelTitle(oldStreamTitle, currenDay) {
+function getNewChannelTitle(oldStreamTitle: string, currenDay: number): string {
     // 'Contagem em tempo real: Dia 000/000! '
     const reg = /Contagem em tempo real: Dia [0-9]{1,3}\/[0-9]{1,3}! /;
     const newDailyCount = `Contagem em tempo real: Dia ${currenDay}/100! `;
@@ -77,10 +77,10 @@ function getNewChannelTitle(oldStreamTitle, currenDay) {
     return newDailyCount + oldStreamTitle;
 }
 
-function streamTitleNeedToBeUpdated(currentStreamTitle, currentDay) {
+function streamTitleNeedToBeUpdated(currentStreamTitle: string, currentDay: number): boolean {
     // match: '000/'
     const reg = /([0-9]{1,3})\//;
-    const res = currentStreamTitle.match(/([0-9]{1,3})\//);
+    const res = currentStreamTitle.match(reg);
 
     if (res === null) return true;
 
@@ -88,13 +88,13 @@ function streamTitleNeedToBeUpdated(currentStreamTitle, currentDay) {
     return streamTitleDay != currentDay;
 }
 
-function getNumberFromText(text) {
-    if (isNaN(text)) {
+function getNumberFromText(text: string): number {
+    const number = Number(text);
+
+    if (isNaN(number)) {
         console.log('getNumberFromText: Texto não é número');
         return 0;
     }
-
-    const number = Number(text);
 
     if (number > 100 || number < 0) {
         console.log('getNumberFromText: Fora do range:', number);
