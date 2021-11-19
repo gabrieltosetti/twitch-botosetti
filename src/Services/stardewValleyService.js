@@ -18,8 +18,9 @@ exports.updateStreamTitleByInGameDaysCount = async function () {
     }
 
     // verao
-    // currentDay += 28;
-    // console.log('Soma do verão para:', currentDay);
+    if (currentDay < 28) {
+        currentDay += 28;
+    }
 
     const currentStreamTitle = await getStreamTitle();
     console.log('Titulo agora:', currentStreamTitle);
@@ -45,7 +46,7 @@ async function getScreenShot() {
 
 function getTextFromImage(imagePath) {
     const area = {
-        left: 1816,
+        left: 1820,
         top: 29,
         width: 56,
         height: 41,

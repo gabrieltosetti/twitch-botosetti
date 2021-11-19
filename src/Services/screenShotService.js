@@ -1,7 +1,8 @@
 const screenshot = require('screenshot-desktop')
 
 exports.saveScreenShotFromPrimaryDisplay = async function(imagePath) {
-    const primaryDisplayId = (await screenshot.listDisplays())[0].id;
+    // TODO: pegar o ID do monitor FullHD sozinho
+    const primaryDisplayId = (await screenshot.listDisplays())[2].id;
     const screenOptions = {
         screen: primaryDisplayId,
         filename: imagePath

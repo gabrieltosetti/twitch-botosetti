@@ -7,7 +7,7 @@ const stardewValleyService = require('./../Services/stardewValleyService');
 
 const start = async function() {
     await stardewValleyService.updateStreamTitleByInGameDaysCount();
-    setTimeout(start, 15000);
+    setTimeout(start, 120000);
 }
 
 start();
