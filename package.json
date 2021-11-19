@@ -10,6 +10,11 @@
     "start-stardewvalley": "node src/Runners/StardewValleyRunner.js"
   },
   "dependencies": {
+    "@twurple/api": "^5.0.9",
+    "@twurple/auth": "^5.0.9",
+    "@twurple/chat": "^5.0.9",
+    "@twurple/eventsub": "^5.0.9",
+    "@twurple/pubsub": "^5.0.9",
     "axios": "^0.24.0",
     "dotenv": "^10.0.0",
     "express": "^4.16.1",
