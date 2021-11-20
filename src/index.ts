@@ -1,6 +1,6 @@
 'use strict';
 require('dotenv').config()
-// require('./twitch/connect');
+require('./twitch/connect');
 
 
 const viewsPath = __dirname + '/views/';
