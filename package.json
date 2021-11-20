@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "ts-node-dev src/index.ts",
-    "start-stardewvalley": "node src/Runners/StardewValleyRunner.js"
+    "start-stardewvalley": "ts-node-dev src/Runners/StardewValleyRunner.ts"
   },
   "dependencies": {
     "axios": "^0.24.0",
