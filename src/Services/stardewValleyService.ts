@@ -97,6 +97,18 @@ function getNumberFromText(text: string): number {
         text = '4';
     }
 
+    // As vezes o numero 6 vem como 'B'
+    if (text === 'B') {
+        console.log(`text '${text}' => 6`);
+        text = '6';
+    }
+
+    // As vezes o numero 8 vem como 'G'
+    if (text === 'G') {
+        console.log(`text '${text}' => 8`);
+        text = '8';
+    }
+
     const number = Number(text);
 
     if (isNaN(number)) {
