@@ -1,19 +1,9 @@
 import { ChatUserstate } from 'tmi.js';
 import Collection from './../../DB/Collection';
-import { ChatAbstract } from './ChatAbstract';
-import Gif from './Gif';
+import { ChatFactory } from './ChatFactory';
 
 export class ChatManager {
-    static readonly GIF = 'gif';
-
-    static insertChatEvents() {
-        Collection.data = {
-            ...Collection.data,
-            ChatEvents: [
-                {name: ChatManager.GIF, enabled: false, class: new Gif()}
-            ]
-        };
-    }
+    static readonly GIF = 'Gif';
 
     static enableEvent(chatEvent: string): void {
         for (let event of Collection.data.ChatEvents) {
@@ -40,7 +30,9 @@ export class ChatManager {
                 continue;
             }
 
-            chatEvent.class.handleMessage(userstate, msg, self);
+            const chatEventClass = ChatFactory.getEventClassFromString(chatEvent.name);
+
+            chatEventClass.handleMessage(userstate, msg, self);
         }
     }
 }

@@ -3,14 +3,13 @@ import {ChatAbstract} from "./ChatAbstract";
 import * as https from 'https';
 import Utils from '../../utils';
 
-export default class Gif extends ChatAbstract {
+export class Gif extends ChatAbstract {
     static data: any;
     static posicaoAtual = 1;
-    tenorKey = process.env.TENOR_GIF_API_KEY;
+    private tenorKey = process.env.TENOR_GIF_API_KEY;
 
     handleMessage(userstate: ChatUserstate, msg: string, self: boolean): void {
-        // TODO descomentar
-        // if (self) { return; } // Ignore messages from the bot
+        if (self) { return; } // Ignore messages from the bot
 
         console.log('Gif: ' + msg);
 

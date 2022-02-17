@@ -9,6 +9,9 @@ const PORT = process.env.PORT || 80;
 import express from 'express';
 import { ChatManager } from './Events/Chat/ChatManager';
 import Utils from './utils';
+import { Migrations } from './DB/Migrations';
+
+Migrations.run();
 
 const app = express();
 const router = express.Router();
@@ -49,5 +52,4 @@ app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
-ChatManager.insertChatEvents();
 ChatManager.enableEvent(ChatManager.GIF);
