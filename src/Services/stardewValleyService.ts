@@ -89,6 +89,26 @@ function streamTitleNeedToBeUpdated(currentStreamTitle: string, currentDay: numb
 }
 
 function getNumberFromText(text: string): number {
+    text = text.replace(/[ \n]/, '');
+
+    // As vezes o numero 4 vem como 'y'
+    if (text === 'y' || text === 'Y') {
+        console.log(`text '${text}' => 4`);
+        text = '4';
+    }
+
+    // As vezes o numero 6 vem como 'B'
+    if (text === 'B') {
+        console.log(`text '${text}' => 6`);
+        text = '6';
+    }
+
+    // As vezes o numero 8 vem como 'G'
+    if (text === 'G') {
+        console.log(`text '${text}' => 8`);
+        text = '8';
+    }
+
     const number = Number(text);
 
     if (isNaN(number)) {

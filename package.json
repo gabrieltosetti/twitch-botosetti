@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "ts-node-dev src/index.ts",
-    "start-stardewvalley": "node src/Runners/StardewValleyRunner.js"
+    "start-stardewvalley": "ts-node-dev src/Runners/StardewValleyRunner.ts"
   },
   "dependencies": {
     "@twurple/api": "^5.1.6",
@@ -26,6 +26,7 @@
     "@types/axios": "^0.14.0",
     "@types/express": "^4.17.13",
     "@types/screenshot-desktop": "^1.12.0",
+    "@types/tmi.js": "^1.8.1",
     "nodemon": "^1.18.10",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.6.4"
