@@ -4,3 +4,4 @@ node_modules
 src/prints/
 tokens.json
 package-lock.json
+.DS_Store

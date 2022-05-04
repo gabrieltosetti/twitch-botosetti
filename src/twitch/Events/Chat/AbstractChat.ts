@@ -1,6 +1,6 @@
 'use strict';
 
-export abstract class AbstractChatCommand
+export abstract class AbstractChat
 {
     protected message: string;
     protected user: string;
