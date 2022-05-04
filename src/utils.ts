@@ -16,16 +16,6 @@ export default class Utils {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    static getRandomGifPos(posicaoAtual: number, min: number, max: number): number {
-        let posicaoAleatoria = this.getRandomInt(min, max);
-
-        if (posicaoAleatoria === posicaoAtual) {
-            return this.getRandomGifPos(posicaoAleatoria, min, max);
-        }
-
-        return posicaoAleatoria;
-    }
-
     static responseWrite(data: any) {
         this.activeResponse.write(`data: ${data}\n\n`);
     }

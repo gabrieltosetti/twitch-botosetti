@@ -9,7 +9,7 @@ export class ChatHandler {
         chatClient.getChatClient().onMessage((channel: string, user: string, message: string) => {
             console.log('chat: ', message);
 
-            for (let chatCommand of this.getEventClass(message, user)) {
+            for (let chatCommand of this.getEventClass(message, user, channel)) {
                 if (chatCommand.isValid()) chatCommand.handle();
             }
         });
@@ -17,7 +17,7 @@ export class ChatHandler {
         console.log('INFO: Chat registrado.');
     }
 
-    private static * getEventClass(message: string, user: string): Generator<AbstractChat, void, unknown> {
-        yield new Gif(message, user);
+    private static * getEventClass(message: string, user: string, channel: string): Generator<AbstractChat, void, unknown> {
+        yield new Gif(message, user, channel);
     }
 }
