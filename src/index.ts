@@ -4,6 +4,7 @@ require('dotenv').config();
 import { startTwichServices } from './twitch/StartTwitchServices';
 import express from 'express';
 import Utils from './utils';
+import { startObsService } from './obs/StartObsService';
 
 const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;
@@ -48,3 +49,4 @@ app.listen(PORT, function () {
 })
 
 startTwichServices();
+startObsService();

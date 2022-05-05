@@ -1,5 +1,6 @@
 'use strict';
 
+import { obsClient } from "../../../obs/obsClient";
 import { AbstractRedemption } from "./AbstractRedemption";
 
 export class RodarCamera extends AbstractRedemption
@@ -11,6 +12,10 @@ export class RodarCamera extends AbstractRedemption
     }
 
     public handle(): void {
-        console.log('reward rodar camera')
+        console.log('reward rodar camera');
+
+        obsClient.rodarCamera(180);
+
+        setTimeout(() => obsClient.rodarCamera(0), 60000);
     }
 }
