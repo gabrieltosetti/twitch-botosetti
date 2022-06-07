@@ -28,7 +28,7 @@ class ScreenShotService:
         top: int = 0,
         left: int = 0
     ):
-        monitor = ScreenShotService.getMonitorConfig(sct)
+        monitor = ScreenShotService.getMonitorConfig()
         shotConfig = {
             "top": monitor["top"] + top,
             "left": monitor["left"] + left,

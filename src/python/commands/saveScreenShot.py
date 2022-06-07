@@ -1,12 +1,10 @@
-import mss
-import mss.tools
-import sys
-import ScreenShotService
+from Services import ScreenShotService
 
-if (len(sys.argv) != 5):
-    raise Exception('Necessário 4 argumentos')
+def run(argv):
+    if (len(argv) != 5):
+        raise Exception('Necessário 5 argumentos')
 
-# convert str to int
-command, top, left, width, height, fileName = (int(x) if x.isnumeric() else x for x in sys.argv)
+    # convert str to int
+    top, left, width, height, fileName = (int(x) if x.isnumeric() else x for x in argv)
 
-ScreenShotService.savePNGFile(width, height, top, left, fileName)
+    ScreenShotService.savePNGFile(width, height, top, left, fileName)
