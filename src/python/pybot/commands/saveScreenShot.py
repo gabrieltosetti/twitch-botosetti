@@ -1,4 +1,5 @@
-from Services import ScreenShotService
+from pybot.Services import ScreenShotService
+
 
 def run(argv):
     if (len(argv) != 5):
