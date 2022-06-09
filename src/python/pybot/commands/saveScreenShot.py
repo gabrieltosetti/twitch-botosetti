@@ -1,5 +1,5 @@
 from pybot.Services import ScreenShotService
-
+from pybot.Libraries import Image
 
 def run(argv):
     if (len(argv) != 5):
@@ -8,4 +8,6 @@ def run(argv):
     # convert str to int
     top, left, width, height, fileName = (int(x) if x.isnumeric() else x for x in argv)
 
-    ScreenShotService.savePNGFile(width, height, top, left, fileName)
+    image: Image = ScreenShotService.takeScreenShot(width, height, top, left)
+
+    image.pilImage.save(fileName)

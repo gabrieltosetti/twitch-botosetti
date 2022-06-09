@@ -2,6 +2,7 @@
 # https://www.youtube.com/watch?v=0sOvCWFmrtA
 
 import mss
+from pybot.Libraries import Image
 
 class ScreenShotService:
     @staticmethod
@@ -27,7 +28,7 @@ class ScreenShotService:
         height: int = 1080,
         top: int = 0,
         left: int = 0
-    ):
+    ) -> Image:
         monitor = ScreenShotService.getMonitorConfig()
         shotConfig = {
             "top": monitor["top"] + top,
@@ -40,7 +41,7 @@ class ScreenShotService:
         with mss.mss() as sct:
             sctImg = sct.grab(shotConfig)
         
-        return sctImg
+        return Image.fromScreenShot(sctImg)
 
     @staticmethod
     def savePNGFile(
