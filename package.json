@@ -10,26 +10,26 @@
     "start-stardewvalley": "ts-node-dev src/Runners/StardewValleyRunner.ts"
   },
   "dependencies": {
-    "@twurple/api": "^5.1.6",
-    "@twurple/auth": "^5.1.6",
-    "@twurple/chat": "^5.1.6",
-    "@twurple/eventsub": "^5.1.6",
-    "@twurple/pubsub": "^5.1.6",
-    "axios": "^0.24.0",
-    "dotenv": "^10.0.0",
-    "express": "^4.16.1",
-    "obs-websocket-js": "^4.0.3",
-    "screenshot-desktop": "^1.12.7",
-    "tesseract.js": "^2.1.5",
-    "tmi.js": "^1.8.5"
+    "@twurple/api": "~5.1.8",
+    "@twurple/auth": "~5.1.8",
+    "@twurple/chat": "~5.1.8",
+    "@twurple/eventsub": "~5.1.8",
+    "@twurple/pubsub": "~5.1.8",
+    "axios": "~0.24.0",
+    "dotenv": "~10.0.0",
+    "express": "~4.16.1",
+    "obs-websocket-js": "~5.0.2",
+    "screenshot-desktop": "~1.12.7",
+    "tesseract.js": "~2.1.5",
+    "tmi.js": "~1.8.5"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
-    "@types/express": "^4.17.13",
-    "@types/screenshot-desktop": "^1.12.0",
-    "@types/tmi.js": "^1.8.1",
-    "nodemon": "^1.18.10",
-    "ts-node-dev": "^1.1.8",
-    "typescript": "^4.6.4"
+    "@types/axios": "~0.14.0",
+    "@types/express": "~4.17.13",
+    "@types/screenshot-desktop": "~1.12.0",
+    "@types/tmi.js": "~1.8.1",
+    "nodemon": "~2.0.20",
+    "ts-node-dev": "~2.0.0",
+    "typescript": "~4.6.4"
   }
 }

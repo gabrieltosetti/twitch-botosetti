@@ -9,15 +9,12 @@ class ObsClient {
         this.obs = new OBSWebSocket();
 
         try {
-            await this.obs.connect({ address: 'localhost:4444', password: 'bestpassever' });
+            await this.obs.connect('ws://localhost:4455', 'xwIPN2NhB5siezdR'); 
         } catch (e) {
-            console.log(e);
+            console.error('Error conecting OBS Websocket: ', e);
         }
 
-        // You must add this handler to avoid uncaught exceptions.
-        this.obs.on('error', (err: any) => {
-            console.error('socket error:', err);
-        });
+        console.log('OBS Websocket conected.');
     }
 
     public getObs(): OBSWebSocket {
@@ -27,7 +24,8 @@ class ObsClient {
 
     public async rodarCamera(rotation: number = 0) {
         let alignment = 0;
-        const nomeCamera = 'camera';
+        const cameraSourceId = 22;
+        const sceneName = 'centro-E';
 
         switch (rotation) {
             case 180:
@@ -40,20 +38,15 @@ class ObsClient {
                 throw new Error('Rodar camera, rotacao nao definida');
         }
 
-        let props = await this.getObs().send('GetSceneItemProperties', { item: { name: nomeCamera } });
-
-        props.rotation = rotation;
-        props.position.alignment = alignment;
-
-        await this.getObs().send(
-            'SetSceneItemProperties',
+        await this.getObs().call(
+            'SetSceneItemTransform',
             {
-                item: { name: props.name },
-                rotation: props.rotation,
-                position: props.position,
-                scale: props.scale,
-                crop: props.crop,
-                bounds: props.bounds,
+                sceneName: sceneName,
+                sceneItemId: cameraSourceId,
+                sceneItemTransform: {
+                    rotation: rotation,
+                    alignment: alignment
+                },
             }
         );
     }
