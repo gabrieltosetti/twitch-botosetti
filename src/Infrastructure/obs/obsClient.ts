@@ -1,8 +1,9 @@
 'use strict';
 
 import OBSWebSocket from 'obs-websocket-js';
+import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface';
 
-class ObsClient {
+class ObsClient implements ObsClientInterface {
     private obs?: OBSWebSocket;
 
     public async connect() {
@@ -22,7 +23,7 @@ class ObsClient {
         return this.obs;
     }
 
-    public async rodarCamera(rotation: number = 0) {
+    public async rotateCamera(rotation: number = 0) {
         let alignment = 0;
         const cameraSourceId = 22;
         const sceneName = 'centro-E';

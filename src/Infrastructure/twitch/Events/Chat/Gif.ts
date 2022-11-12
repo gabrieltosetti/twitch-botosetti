@@ -1,6 +1,6 @@
 'use strict';
 
-import Utils from "../../../utils";
+import Utils from "../../../../Application/Helpers/utils";
 import { AbstractChat } from "./AbstractChat";
 import * as https from 'https';
 

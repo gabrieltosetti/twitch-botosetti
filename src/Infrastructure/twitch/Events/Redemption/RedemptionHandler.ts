@@ -3,7 +3,7 @@
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
 import { pubSubClient } from "../../pubSubClient";
 import { AbstractRedemption } from "./AbstractRedemption";
-import { RodarCamera } from "./RodarCamera";
+import { RotateCameraRedemption } from "./RotateCameraRedemption";
 
 export class RedemptionHandler {
     public static register() {
@@ -18,6 +18,6 @@ export class RedemptionHandler {
     }
 
     private static * getEventClass(redemption: PubSubRedemptionMessage): Generator<AbstractRedemption, void, unknown> {
-        yield new RodarCamera(redemption);
+        yield new RotateCameraRedemption(redemption);
     }
 }

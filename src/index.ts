@@ -1,10 +1,10 @@
 'use strict';
 
 require('dotenv').config();
-import { startTwichServices } from './twitch/StartTwitchServices';
+import { startTwichServices } from './Infrastructure/twitch/StartTwitchServices';
 import express from 'express';
-import Utils from './utils';
-import { startObsService } from './obs/StartObsService';
+import Utils from './Application/Helpers/utils';
+import { startObsService } from './Infrastructure/obs/StartObsService';
 
 const viewsPath = __dirname + '/views/';
 const PORT = process.env.PORT || 80;

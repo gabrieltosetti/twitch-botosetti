@@ -1,6 +1,6 @@
 import * as Ocr from './ocrService';
 import path from 'path';
-import * as twitchAPI from '../twitch/twitchAPI';
+import * as twitchAPI from '../../Infrastructure/twitch/twitchAPI';
 import * as screenShot from './screenShotService';
 
 export const updateStreamTitleByInGameDaysCount = async function () {
