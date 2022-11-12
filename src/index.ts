@@ -6,7 +6,7 @@ import express from 'express';
 import Utils from './Application/Helpers/utils';
 import { startObsService } from './Infrastructure/obs/StartObsService';
 
-const viewsPath = __dirname + '/views/';
+const viewsPath = __dirname + '/Application/views/';
 const PORT = process.env.PORT || 80;
 
 const app = express();

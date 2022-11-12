@@ -2,7 +2,7 @@
 
 import { chatClient } from "../../chatClient";
 import { AbstractChat } from "./AbstractChat";
-import { Gif } from "./Gif";
+import { GifChat } from "./GifChat";
 
 export class ChatHandler {
     public static register() {
@@ -18,6 +18,6 @@ export class ChatHandler {
     }
 
     private static * getEventClass(message: string, user: string, channel: string): Generator<AbstractChat, void, unknown> {
-        yield new Gif(message, user, channel);
+        yield new GifChat(message, user, channel);
     }
 }
