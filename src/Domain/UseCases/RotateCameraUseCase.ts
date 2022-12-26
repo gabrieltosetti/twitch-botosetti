@@ -8,7 +8,11 @@ export class RotateCameraUseCase {
     }
 
     public async execute(rotation: number) {
-        await this.obsClient.rotateCamera(rotation);
-        setTimeout(() => this.obsClient.rotateCamera(0), 30 * 1000);
+        try {
+            await this.obsClient.rotateCamera(rotation);
+            setTimeout(() => this.obsClient.rotateCamera(0), 30 * 1000);
+        } catch (e) {
+            console.error('Error rotating camera: ', e);
+        }
     }
 }

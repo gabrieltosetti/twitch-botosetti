@@ -23,10 +23,44 @@ class ObsClient implements ObsClientInterface {
         return this.obs;
     }
 
-    public async rotateCamera(rotation: number = 0) {
+    public async getActiveScene(): Promise<string> {
+        const scenes = await this.getObs().call('GetSceneList');
+        return scenes.currentProgramSceneName;
+    }
+
+    public async getSceneItemList(sceneName: string): Promise<{
+        /**
+         * Array of scene items in the scene
+         */
+        sceneItems: JsonObject[];
+    }> {
+        return await this.getObs().call('GetSceneItemList', {sceneName});
+    }
+
+    public async getActiveCameraId(): Promise<number> {
+        const sceneItems = await this.getSceneItemList(await this.getActiveScene());
+        const camera = sceneItems.sceneItems.find((item) => item.name.includes('dshow_input'));
+        if (!camera) throw new Error('Camera nao encontrada');
+        return camera.sceneItemId;
+    }
+
+    public async rotateCamera(rotation: number = 0): Promise<void> {
         let alignment = 0;
-        const cameraSourceId = 22;
-        const sceneName = 'centro-E';
+        let cameraSourceId = 0;
+
+        console.log(tttt);
+
+        const activeScene = await this.getActiveScene();
+        switch (activeScene) {
+            case 'centro-E':
+                cameraSourceId = 22;
+                break;
+            case 'centro-E 2':
+                cameraSourceId = 22;
+                break;
+            default:
+                throw new Error(`Rodar camera, scene nao definida: ${activeScene}`);
+        }
 
         switch (rotation) {
             case 180:
@@ -42,7 +76,7 @@ class ObsClient implements ObsClientInterface {
         await this.getObs().call(
             'SetSceneItemTransform',
             {
-                sceneName: sceneName,
+                sceneName: activeScene,
                 sceneItemId: cameraSourceId,
                 sceneItemTransform: {
                     rotation: rotation,
