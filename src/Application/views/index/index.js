@@ -6,7 +6,7 @@
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    const sse = new EventSource("http://localhost:80/stream");
+    const sse = new EventSource("http://localhost:8080/stream");
 
     sse.onmessage = function(event) {
         const gif = document.createElement('div');

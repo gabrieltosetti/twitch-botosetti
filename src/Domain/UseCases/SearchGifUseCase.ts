@@ -1,11 +1,11 @@
 import Utils from "../../Application/Helpers/utils";
-import { TrenorHttpClientInterface } from "../HttpClients/TrenorHttpClientInterface";
+import { TenorHttpClientInterface } from "../HttpClients/TenorHttpClientInterface";
 
 export class SearchGifUseCase {
-    private trenorHttpClient: TrenorHttpClientInterface;
+    private trenorHttpClient: TenorHttpClientInterface;
     private static currentIndex: number = 1;
 
-    constructor(trenorHttpClient: TrenorHttpClientInterface) {
+    constructor(trenorHttpClient: TenorHttpClientInterface) {
         this.trenorHttpClient = trenorHttpClient;
     }
 

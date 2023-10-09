@@ -8,11 +8,14 @@ class ObsClient implements ObsClientInterface {
 
     public async connect() {
         this.obs = new OBSWebSocket();
+        const OBSWebSocketURL = process.env.OBS_WEBSOCKET_URL || '';
+        const OBSWebSocketPassword = process.env.OBS_WEBSOCKET_PASSWORD || '';
 
         try {
-            await this.obs.connect('ws://localhost:4455', 'xwIPN2NhB5siezdR'); 
+            await this.obs.connect(OBSWebSocketURL, OBSWebSocketPassword); 
         } catch (e) {
             console.error('Error conecting OBS Websocket: ', e);
+            return;
         }
 
         console.log('OBS Websocket conected.');
@@ -23,10 +26,19 @@ class ObsClient implements ObsClientInterface {
         return this.obs;
     }
 
+    public async getsSceneItems(sceneName: string) {
+        console.log(await this.getObs().call(
+            'GetSceneItemList',
+            {
+                sceneName
+            }
+            ));
+    }
+
     public async rotateCamera(rotation: number = 0) {
         let alignment = 0;
-        const cameraSourceId = 22;
-        const sceneName = 'centro-E';
+        const cameraSourceId = 27;
+        const sceneName = process.env.SCENE_NAME || '';
 
         switch (rotation) {
             case 180:

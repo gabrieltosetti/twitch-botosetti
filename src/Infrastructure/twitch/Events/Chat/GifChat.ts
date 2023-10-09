@@ -3,7 +3,7 @@
 import Utils from "../../../../Application/Helpers/utils";
 import { AbstractChat } from "./AbstractChat";
 import { SearchGifUseCase } from "../../../../Domain/UseCases/SearchGifUseCase";
-import { TrenorHttpClient } from "../../../HttpsClients/TrenorHttpClient";
+import { TenorHttpClient } from "../../../HttpsClients/TenorHttpClient";
 
 export class GifChat extends AbstractChat {
 
@@ -19,7 +19,7 @@ export class GifChat extends AbstractChat {
 
         const searchPhrase = encodeURI(this.message.substring(5));
 
-        const searchGifUseCase = new SearchGifUseCase(new TrenorHttpClient());
+        const searchGifUseCase = new SearchGifUseCase(new TenorHttpClient());
         const gifUrl = await searchGifUseCase.execute(searchPhrase);
 
         console.debug(gifUrl);

@@ -1,6 +1,6 @@
 'use strict';
 
-import { RotateCameraUseCase } from "../../../../Domain/UseCases/rotateCameraUseCase";
+import { RotateCameraUseCase } from "../../../../Domain/UseCases/RotateCameraUseCase";
 import { obsClient } from "../../../obs/obsClient";
 import { AbstractRedemption } from "./AbstractRedemption";
 

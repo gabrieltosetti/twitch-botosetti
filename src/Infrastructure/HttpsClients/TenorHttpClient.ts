@@ -1,13 +1,13 @@
 import axios from "axios";
-import { TrenorHttpClientInterface } from "../../Domain/HttpClients/TrenorHttpClientInterface";
+import { TenorHttpClientInterface as TenorHttpClientInterface } from "../../Domain/HttpClients/TenorHttpClientInterface";
 
-export class TrenorHttpClient implements TrenorHttpClientInterface {
+export class TenorHttpClient implements TenorHttpClientInterface {
     private apiKey: string;
     private baseUrl: string;
 
     constructor() {
         this.apiKey = process.env.TENOR_GIF_API_KEY || '';
-        this.baseUrl = process.env.TRENOR_URI || '';
+        this.baseUrl = process.env.TENOR_URI || '';
     }
 
     public async searchGifFromPhrase(searchPhrase: string, resultIndex: number): Promise<string> {

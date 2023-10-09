@@ -39,6 +39,7 @@ router.get("/", function (req, res) {
 });
 
 router.get("/stream", function (req, res) {
+    console.log("stream");
     res.setHeader('Content-Type', 'text/event-stream');
 
     Utils.activeResponse = res;
