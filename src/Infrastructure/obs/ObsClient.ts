@@ -1,9 +1,9 @@
-'use strict';
-
 import OBSWebSocket from 'obs-websocket-js';
 import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface';
+import { singleton } from 'tsyringe';
 
-class ObsClient implements ObsClientInterface {
+@singleton()
+export default class ObsClient implements ObsClientInterface {
     private obs?: OBSWebSocket;
 
     public async connect() {
@@ -64,5 +64,3 @@ class ObsClient implements ObsClientInterface {
         );
     }
 }
-
-export const obsClient = new ObsClient();

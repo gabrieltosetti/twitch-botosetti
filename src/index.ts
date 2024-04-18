@@ -1,12 +1,13 @@
 require('dotenv').config();
 import 'reflect-metadata';
-import { startTwichServices } from './Infrastructure/twitch/StartTwitchServices';
+import { container } from 'tsyringe';
+import StartTwichServices from './Infrastructure/twitch/StartTwitchServices';
 import express from 'express';
 import Utils from './Application/Helpers/Utils';
-import { startObsService } from './Infrastructure/obs/StartObsService';
+import ObsClient from './Infrastructure/obs/ObsClient';
 
-/** REPOSITORIES */
-// container.registerSingleton<IDashboardDAO>('DashboardDAO', DashboardDAO);
+/** CLIENTS */
+container.register<ObsClient>('ObsClientInterface', ObsClient);
 
 const viewsPath = __dirname + '/Application/views/';
 const PORT = process.env.PORT || 80;
@@ -51,5 +52,5 @@ app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
-startTwichServices();
-startObsService();
+container.resolve(StartTwichServices).execute();
+container.resolve<ObsClient>("ObsClientInterface").connect();

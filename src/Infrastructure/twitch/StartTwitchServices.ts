@@ -1,16 +1,28 @@
-import { container } from 'tsyringe';
+import { autoInjectable } from 'tsyringe';
 import TwitchPubSubClient from "./TwitchPubSubClient";
 import AuthProvider from './AuthProvider';
 import RedemptionHandler from "./Events/Redemption/RedemptionHandler";
 import TwitchChatClient from "./TwitchChatClient";
 import ChatHandler from "./Events/Chat/ChatHandler";
 
-export async function startTwichServices() {
-    await container.resolve(AuthProvider).authenticate();
+@autoInjectable()
+export default class StartTwichServices {
+    constructor(
+        private authProvider: AuthProvider,
+        private twitchPubSubClient: TwitchPubSubClient,
+        private twitchChatClient: TwitchChatClient,
+        private chatHandler: ChatHandler,
+        private redemptionHandler: RedemptionHandler
 
-    await container.resolve(TwitchPubSubClient).connect();
-    await container.resolve(TwitchChatClient).connect();
-    
-    container.resolve(ChatHandler).register();
-    container.resolve(RedemptionHandler).register();
+    ) { }
+
+    public async execute() {
+        await this.authProvider.authenticate();
+
+        await this.twitchPubSubClient.connect();
+        await this.twitchChatClient.connect();
+
+        this.chatHandler.register();
+        this.redemptionHandler.register();
+    }
 }

@@ -1,12 +1,16 @@
-import { autoInjectable } from 'tsyringe';
+import { autoInjectable, inject } from 'tsyringe';
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
 import TwitchPubSubClient from "../../TwitchPubSubClient";
-import { AbstractRedemption } from "./AbstractRedemption";
-import { RotateCameraRedemption } from "./RotateCameraRedemption";
+import AbstractRedemption from "./AbstractRedemption";
+import RotateCameraRedemption from "./RotateCameraRedemption";
+import ObsClientInterface from '../../../../Domain/Contracts/ObsClientInterface';
 
 @autoInjectable()
 export default class RedemptionHandler {
-    constructor(private pubSubClient: TwitchPubSubClient) {}
+    constructor(
+        private pubSubClient: TwitchPubSubClient,
+        @inject("ObsClientInterface") private obsClient: ObsClientInterface
+    ) {}
 
     public register() {
         this.pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
@@ -19,6 +23,6 @@ export default class RedemptionHandler {
     }
 
     private * getEventClass(redemption: PubSubRedemptionMessage): Generator<AbstractRedemption, void, unknown> {
-        yield new RotateCameraRedemption(redemption);
+        yield new RotateCameraRedemption(redemption, this.obsClient);
     }
 }
