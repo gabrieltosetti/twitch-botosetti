@@ -1,4 +1,4 @@
-import TwitchChatClient from "../../chatClient";
+import TwitchChatClient from "../../TwitchChatClient";
 
 export default abstract class AbstractChat {
     private chatClient: TwitchChatClient;

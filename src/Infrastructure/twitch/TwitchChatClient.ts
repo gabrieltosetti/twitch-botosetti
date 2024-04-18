@@ -1,6 +1,6 @@
 import { singleton, autoInjectable } from 'tsyringe';
 import { ChatClient } from '@twurple/chat';
-import AuthProvider from './authProvider';
+import AuthProvider from './AuthProvider';
 
 @singleton()
 @autoInjectable()

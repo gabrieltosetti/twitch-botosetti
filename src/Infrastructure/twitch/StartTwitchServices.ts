@@ -1,8 +1,8 @@
 import { container } from 'tsyringe';
-import TwitchPubSubClient from "./pubSubClient";
-import AuthProvider from './authProvider';
+import TwitchPubSubClient from "./TwitchPubSubClient";
+import AuthProvider from './AuthProvider';
 import RedemptionHandler from "./Events/Redemption/RedemptionHandler";
-import TwitchChatClient from "./chatClient";
+import TwitchChatClient from "./TwitchChatClient";
 import ChatHandler from "./Events/Chat/ChatHandler";
 
 export async function startTwichServices() {

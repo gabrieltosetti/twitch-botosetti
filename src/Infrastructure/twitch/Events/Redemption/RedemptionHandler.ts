@@ -1,6 +1,6 @@
 import { autoInjectable } from 'tsyringe';
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import TwitchPubSubClient from "../../pubSubClient";
+import TwitchPubSubClient from "../../TwitchPubSubClient";
 import { AbstractRedemption } from "./AbstractRedemption";
 import { RotateCameraRedemption } from "./RotateCameraRedemption";
 

@@ -1,6 +1,6 @@
 import { singleton, autoInjectable } from 'tsyringe';
 import { PubSubRedemptionMessage, PubSubClient } from '@twurple/pubsub';
-import AuthProvider from './authProvider';
+import AuthProvider from './AuthProvider';
 
 @singleton()
 @autoInjectable()
