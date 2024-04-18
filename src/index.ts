@@ -1,10 +1,12 @@
-'use strict';
-
 require('dotenv').config();
+import 'reflect-metadata';
 import { startTwichServices } from './Infrastructure/twitch/StartTwitchServices';
 import express from 'express';
 import Utils from './Application/Helpers/Utils';
 import { startObsService } from './Infrastructure/obs/StartObsService';
+
+/** REPOSITORIES */
+// container.registerSingleton<IDashboardDAO>('DashboardDAO', DashboardDAO);
 
 const viewsPath = __dirname + '/Application/views/';
 const PORT = process.env.PORT || 80;

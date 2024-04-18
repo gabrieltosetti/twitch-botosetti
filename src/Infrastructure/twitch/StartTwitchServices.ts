@@ -1,18 +1,16 @@
-'use strict';
-
-import { pubSubClient } from "./pubSubClient";
-import { authProvider } from './authProvider';
-import { RedemptionHandler } from "./Events/Redemption/RedemptionHandler";
-import { chatClient } from "./chatClient";
-import { ChatHandler } from "./Events/Chat/ChatHandler";
+import { container } from 'tsyringe';
+import TwitchPubSubClient from "./pubSubClient";
+import AuthProvider from './authProvider';
+import RedemptionHandler from "./Events/Redemption/RedemptionHandler";
+import TwitchChatClient from "./chatClient";
+import ChatHandler from "./Events/Chat/ChatHandler";
 
 export async function startTwichServices() {
-    // Autenticar com as credenciais da twitch
-    await authProvider.authenticate();
+    await container.resolve(AuthProvider).authenticate();
 
-    await pubSubClient.connect();
-    await chatClient.connect();
-
-    RedemptionHandler.register();
-    ChatHandler.register();
+    await container.resolve(TwitchPubSubClient).connect();
+    await container.resolve(TwitchChatClient).connect();
+    
+    container.resolve(ChatHandler).register();
+    container.resolve(RedemptionHandler).register();
 }

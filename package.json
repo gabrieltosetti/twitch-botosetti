@@ -18,7 +18,9 @@
     "axios": "~1.1.3",
     "dotenv": "~16.0.3",
     "express": "~4.18.2",
-    "obs-websocket-js": "~5.0.2"
+    "obs-websocket-js": "~5.0.2",
+    "reflect-metadata": "^0.2.2",
+    "tsyringe": "^4.8.0"
   },
   "devDependencies": {
     "@types/axios": "~0.14.0",

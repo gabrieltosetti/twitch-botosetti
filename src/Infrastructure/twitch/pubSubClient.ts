@@ -1,14 +1,21 @@
+import { singleton, autoInjectable } from 'tsyringe';
 import { PubSubRedemptionMessage, PubSubClient } from '@twurple/pubsub';
-import { authProvider } from './authProvider';
+import AuthProvider from './authProvider';
 
-class TwitchPubSubClient {
+@singleton()
+@autoInjectable()
+export default class TwitchPubSubClient {
+    private authProvider: AuthProvider;
     private client?: PubSubClient;
     private userId?: string;
 
-    public async connect()
-    {
+    constructor(authProvider: AuthProvider) {
+        this.authProvider = authProvider;
+    }
+
+    public async connect() {
         this.client = new PubSubClient();
-        this.userId = await this.client.registerUserListener(authProvider.getAuthProvider());
+        this.userId = await this.client.registerUserListener(this.authProvider.getAuthProvider());
 
         console.log('INFO: PubSub conectado');
     }
@@ -23,10 +30,7 @@ class TwitchPubSubClient {
         return this.userId;
     }
 
-    public onRedemption(callback: (message: PubSubRedemptionMessage) => void)
-    {
+    public onRedemption(callback: (message: PubSubRedemptionMessage) => void) {
         return this.getClient().onRedemption(this.getUserId(), callback);
     }
 }
-
-export const pubSubClient = new TwitchPubSubClient();

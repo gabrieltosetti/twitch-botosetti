@@ -1,13 +1,15 @@
-'use strict';
-
+import { autoInjectable } from 'tsyringe';
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import { pubSubClient } from "../../pubSubClient";
+import TwitchPubSubClient from "../../pubSubClient";
 import { AbstractRedemption } from "./AbstractRedemption";
 import { RotateCameraRedemption } from "./RotateCameraRedemption";
 
-export class RedemptionHandler {
-    public static register() {
-        pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
+@autoInjectable()
+export default class RedemptionHandler {
+    constructor(private pubSubClient: TwitchPubSubClient) {}
+
+    public register() {
+        this.pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
             for (let chatCommand of this.getEventClass(redemption)) {
                 if (chatCommand.isValid()) chatCommand.handle();
             }
@@ -16,7 +18,7 @@ export class RedemptionHandler {
         console.log('INFO: PubSub registrado.');
     }
 
-    private static * getEventClass(redemption: PubSubRedemptionMessage): Generator<AbstractRedemption, void, unknown> {
+    private * getEventClass(redemption: PubSubRedemptionMessage): Generator<AbstractRedemption, void, unknown> {
         yield new RotateCameraRedemption(redemption);
     }
 }

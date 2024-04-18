@@ -1,12 +1,18 @@
-'use strict';
-
-import { chatClient } from "../../chatClient";
-import { AbstractChat } from "./AbstractChat";
+import TwitchChatClient from "../../chatClient";
+import AbstractChat from "./AbstractChat";
 import { GifChat } from "./GifChat";
+import { autoInjectable } from 'tsyringe';
 
-export class ChatHandler {
-    public static register() {
-        chatClient.getChatClient().onMessage((channel: string, user: string, message: string) => {
+@autoInjectable()
+export default class ChatHandler {
+    chatClient: TwitchChatClient;
+
+    constructor(chatClient: TwitchChatClient) {
+        this.chatClient = chatClient;
+    }
+
+    public register(): void {
+        this.chatClient.getChatClient().onMessage((channel: string, user: string, message: string) => {
             console.log('chat: ', message);
 
             for (let chatCommand of this.getEventClass(message, user, channel)) {
@@ -17,7 +23,7 @@ export class ChatHandler {
         console.log('INFO: Chat registrado.');
     }
 
-    private static * getEventClass(message: string, user: string, channel: string): Generator<AbstractChat, void, unknown> {
-        yield new GifChat(message, user, channel);
+    private * getEventClass(message: string, user: string, channel: string): Generator<AbstractChat, void, unknown> {
+        yield new GifChat(this.chatClient, message, user, channel);
     }
 }

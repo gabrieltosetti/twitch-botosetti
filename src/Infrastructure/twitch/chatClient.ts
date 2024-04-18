@@ -1,14 +1,21 @@
-'use strict';
-
+import { singleton, autoInjectable } from 'tsyringe';
 import { ChatClient } from '@twurple/chat';
-import { authProvider } from './authProvider';
+import AuthProvider from './authProvider';
 
-class TwitchChatClient {
+@singleton()
+@autoInjectable()
+export default class TwitchChatClient {
+    private authProvider: AuthProvider;
     private chatClient?: ChatClient;
+    public test = 0;
+
+    constructor(authProvider: AuthProvider) {
+        this.authProvider = authProvider;
+    }
 
     public async connect() {
         this.chatClient = new ChatClient({
-            authProvider: authProvider.getAuthProvider(),
+            authProvider: this.authProvider.getAuthProvider(),
             channels: [String(process.env.CHANNEL_NAME)]
         });
 
@@ -21,5 +28,3 @@ class TwitchChatClient {
         return this.chatClient;
     }
 }
-
-export const chatClient = new TwitchChatClient();
