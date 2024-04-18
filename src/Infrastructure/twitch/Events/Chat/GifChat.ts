@@ -1,6 +1,6 @@
 'use strict';
 
-import Utils from "../../../../Application/Helpers/utils";
+import Utils from "../../../../Application/Helpers/Utils";
 import { AbstractChat } from "./AbstractChat";
 import { SearchGifUseCase } from "../../../../Domain/UseCases/SearchGifUseCase";
 import { TenorHttpClient } from "../../../HttpsClients/TenorHttpClient";

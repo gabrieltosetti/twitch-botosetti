@@ -1,4 +1,4 @@
-import Utils from "../../Application/Helpers/utils";
+import Utils from "../../Application/Helpers/Utils";
 import { TenorHttpClientInterface } from "../HttpClients/TenorHttpClientInterface";
 
 export class SearchGifUseCase {

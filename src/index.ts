@@ -3,7 +3,7 @@
 require('dotenv').config();
 import { startTwichServices } from './Infrastructure/twitch/StartTwitchServices';
 import express from 'express';
-import Utils from './Application/Helpers/utils';
+import Utils from './Application/Helpers/Utils';
 import { startObsService } from './Infrastructure/obs/StartObsService';
 
 const viewsPath = __dirname + '/Application/views/';

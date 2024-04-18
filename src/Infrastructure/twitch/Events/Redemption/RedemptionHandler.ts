@@ -8,7 +8,6 @@ import { RotateCameraRedemption } from "./RotateCameraRedemption";
 export class RedemptionHandler {
     public static register() {
         pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
-
             for (let chatCommand of this.getEventClass(redemption)) {
                 if (chatCommand.isValid()) chatCommand.handle();
             }

@@ -1,6 +1,6 @@
 'use strict';
 
-import { obsClient } from './obsClient';
+import { obsClient } from './ObsClient';
 
 export async function startObsService() {
     await obsClient.connect();

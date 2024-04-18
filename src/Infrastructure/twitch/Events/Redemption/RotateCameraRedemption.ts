@@ -1,7 +1,7 @@
 'use strict';
 
 import { RotateCameraUseCase } from "../../../../Domain/UseCases/RotateCameraUseCase";
-import { obsClient } from "../../../obs/obsClient";
+import { obsClient } from "../../../obs/ObsClient";
 import { AbstractRedemption } from "./AbstractRedemption";
 
 export class RotateCameraRedemption extends AbstractRedemption
