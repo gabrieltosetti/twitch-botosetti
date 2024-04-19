@@ -1,10 +1,9 @@
 import Utils from "../../../../Application/Helpers/Utils";
 import AbstractChat from "./AbstractChat";
-import { SearchGifUseCase } from "../../../../Domain/UseCases/SearchGifUseCase";
-import { TenorHttpClient } from "../../../HttpsClients/TenorHttpClient";
+import SearchGifUseCase from "../../../../Domain/UseCases/SearchGifUseCase";
+import TenorHttpClient from "../../../HttpsClients/TenorHttpClient";
 
-export class GifChat extends AbstractChat {
-
+export default class GifChat extends AbstractChat {
     public isValid(): boolean {
         return (this.message === '!gif' || this.message.indexOf('!gif ') === 0);
     }

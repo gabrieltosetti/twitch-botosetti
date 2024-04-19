@@ -1,7 +1,7 @@
 import axios from "axios";
-import { TenorHttpClientInterface as TenorHttpClientInterface } from "../../Domain/HttpClients/TenorHttpClientInterface";
+import TenorHttpClientInterface from "../../Domain/HttpClients/TenorHttpClientInterface";
 
-export class TenorHttpClient implements TenorHttpClientInterface {
+export default class TenorHttpClient implements TenorHttpClientInterface {
     private apiKey: string;
     private baseUrl: string;
 

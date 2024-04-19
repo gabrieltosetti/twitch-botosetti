@@ -1,6 +1,6 @@
 import TwitchChatClient from "../../TwitchChatClient";
 import AbstractChat from "./AbstractChat";
-import { GifChat } from "./GifChat";
+import GifChat from "./GifChat";
 import { autoInjectable } from 'tsyringe';
 
 @autoInjectable()

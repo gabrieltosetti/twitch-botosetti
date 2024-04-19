@@ -1,6 +1,6 @@
 import ObsClientInterface from "../Contracts/ObsClientInterface";
 
-export class RotateCameraUseCase {
+export default class RotateCameraUseCase {
     private obsClient: ObsClientInterface;
 
     constructor(obsClient: ObsClientInterface) {

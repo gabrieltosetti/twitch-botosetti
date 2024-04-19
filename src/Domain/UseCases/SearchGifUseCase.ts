@@ -1,7 +1,7 @@
 import Utils from "../../Application/Helpers/Utils";
-import { TenorHttpClientInterface } from "../HttpClients/TenorHttpClientInterface";
+import TenorHttpClientInterface from "../HttpClients/TenorHttpClientInterface";
 
-export class SearchGifUseCase {
+export default class SearchGifUseCase {
     private trenorHttpClient: TenorHttpClientInterface;
     private static currentIndex: number = 1;
 

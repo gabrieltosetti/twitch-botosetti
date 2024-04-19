@@ -13,7 +13,6 @@ export default class StartTwichServices {
         private twitchChatClient: TwitchChatClient,
         private chatHandler: ChatHandler,
         private redemptionHandler: RedemptionHandler
-
     ) { }
 
     public async execute() {
