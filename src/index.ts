@@ -7,7 +7,7 @@ import Utils from './Application/Helpers/Utils';
 import ObsClient from './Infrastructure/obs/ObsClient';
 
 /** CLIENTS */
-container.register<ObsClient>('ObsClientInterface', ObsClient);
+container.registerSingleton<ObsClient>('ObsClientInterface', ObsClient);
 
 const viewsPath = __dirname + '/Application/views/';
 const PORT = process.env.PORT || 80;
@@ -52,5 +52,5 @@ app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
-container.resolve(StartTwichServices).execute();
 container.resolve<ObsClient>("ObsClientInterface").connect();
+container.resolve(StartTwichServices).execute();

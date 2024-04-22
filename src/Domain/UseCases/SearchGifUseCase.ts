@@ -1,16 +1,16 @@
 import Utils from "../../Application/Helpers/Utils";
-import TenorHttpClientInterface from "../HttpClients/TenorHttpClientInterface";
+import GifRepositoryInterface from "../Repositories/GifRepositoryInterface";
 
 export default class SearchGifUseCase {
-    private trenorHttpClient: TenorHttpClientInterface;
+    private trenorHttpClient: GifRepositoryInterface;
     private static currentIndex: number = 1;
 
-    constructor(trenorHttpClient: TenorHttpClientInterface) {
+    constructor(trenorHttpClient: GifRepositoryInterface) {
         this.trenorHttpClient = trenorHttpClient;
     }
 
     public async execute(searchPhrase: string): Promise<string> {
-        const gifUrl = await this.trenorHttpClient.searchGifFromPhrase(
+        const gifUrl = await this.trenorHttpClient.findByTitleWithPhrase(
             searchPhrase,
             this.getRandomGifIndex()
         );

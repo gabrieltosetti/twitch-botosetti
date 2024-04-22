@@ -1,23 +1,15 @@
 import TwitchChatClient from "../../TwitchChatClient";
 
 export default abstract class AbstractChat {
-    private chatClient: TwitchChatClient;
-    protected message: string;
-    protected user: string;
-    protected channel: string;
+    public constructor(
+        private chatClient: TwitchChatClient
+    ) { }
 
-    public constructor(chatClient: TwitchChatClient, message: string, user: string, channel: string) {
-        this.chatClient = chatClient;
-        this.message = message;
-        this.user = user;
-        this.channel = channel;
-    }
+    public abstract isValid(message: string, user: string): boolean;
 
-    public abstract isValid(): boolean;
+    public abstract handle(message: string, user: string): void;
 
-    public abstract handle(): void;
-
-    protected chatSay(message: string) {
-        return this.chatClient.getChatClient().say(this.channel, message);
+    protected say(message: string) {
+        return this.chatClient.getChatClient().say("GTosetti", message);
     }
 }
