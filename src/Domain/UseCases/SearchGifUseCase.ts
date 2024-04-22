@@ -1,16 +1,17 @@
+import { autoInjectable, inject } from "tsyringe";
 import Utils from "../../Application/Helpers/Utils";
 import GifRepositoryInterface from "../Repositories/GifRepositoryInterface";
 
+@autoInjectable()
 export default class SearchGifUseCase {
-    private trenorHttpClient: GifRepositoryInterface;
     private static currentIndex: number = 1;
 
-    constructor(trenorHttpClient: GifRepositoryInterface) {
-        this.trenorHttpClient = trenorHttpClient;
-    }
+    constructor(
+        @inject("GifRepositoryInterface") private readonly gifRepository: GifRepositoryInterface
+    ) { }
 
     public async execute(searchPhrase: string): Promise<string> {
-        const gifUrl = await this.trenorHttpClient.findByTitleWithPhrase(
+        const gifUrl = await this.gifRepository.findByTitleWithPhrase(
             searchPhrase,
             this.getRandomGifIndex()
         );

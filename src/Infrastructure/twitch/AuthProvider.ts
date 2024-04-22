@@ -19,6 +19,8 @@ export default class AuthProvider {
             },
             tokenData
         );
+
+        console.log('INFO: AuthProvider autenticado');
     }
 
     public getAuthProvider(): RefreshingAuthProvider {

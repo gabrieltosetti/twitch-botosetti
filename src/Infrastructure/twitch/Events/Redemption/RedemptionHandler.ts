@@ -1,18 +1,18 @@
-import { autoInjectable } from 'tsyringe';
+import { autoInjectable, inject } from 'tsyringe';
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import TwitchPubSubClient from "../../TwitchPubSubClient";
 import AbstractRedemption from "./AbstractRedemption";
 import RotateCameraRedemption from "./RotateCameraRedemption";
+import StreamManagerInterface from '../../../../Domain/Contracts/StreamManagerInterface';
 
 @autoInjectable()
 export default class RedemptionHandler {
     constructor(
-        private pubSubClient: TwitchPubSubClient,
+        @inject("StreamManagerInterface") private readonly streamManager: StreamManagerInterface,
         private rotateCameraRedemption: RotateCameraRedemption
     ) {}
 
     public register() {
-        this.pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
+        this.streamManager.onRedemption((redemption: PubSubRedemptionMessage) => {
             for (let chatCommand of this.getEventClass()) {
                 if (chatCommand.isValid(redemption)) chatCommand.handle(redemption);
             }
