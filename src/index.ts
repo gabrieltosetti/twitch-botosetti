@@ -1,10 +1,13 @@
-'use strict';
-
 require('dotenv').config();
-import { startTwichServices } from './Infrastructure/twitch/StartTwitchServices';
+import 'reflect-metadata';
+import { container } from 'tsyringe';
+import StartTwichServices from './Infrastructure/twitch/StartTwitchServices';
 import express from 'express';
 import Utils from './Application/Helpers/Utils';
-import { startObsService } from './Infrastructure/obs/StartObsService';
+import ObsClient from './Infrastructure/obs/ObsClient';
+
+/** CLIENTS */
+container.registerSingleton<ObsClient>('ObsClientInterface', ObsClient);
 
 const viewsPath = __dirname + '/Application/views/';
 const PORT = process.env.PORT || 80;
@@ -49,5 +52,5 @@ app.listen(PORT, function () {
     console.log(`Example app listening on port ${PORT}!`)
 })
 
-startTwichServices();
-startObsService();
+container.resolve<ObsClient>("ObsClientInterface").connect();
+container.resolve(StartTwichServices).execute();

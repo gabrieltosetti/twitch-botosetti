@@ -1,23 +1,27 @@
-'use strict';
-
+import { autoInjectable } from "tsyringe";
 import Utils from "../../../../Application/Helpers/Utils";
-import { AbstractChat } from "./AbstractChat";
-import { SearchGifUseCase } from "../../../../Domain/UseCases/SearchGifUseCase";
-import { TenorHttpClient } from "../../../HttpsClients/TenorHttpClient";
+import AbstractChat from "./AbstractChat";
+import SearchGifUseCase from "../../../../Domain/UseCases/SearchGifUseCase";
+import TenorHttpClient from "../../../HttpsClients/TenorHttpClient";
+import TwitchChatClient from "../../TwitchChatClient";
 
-export class GifChat extends AbstractChat {
-
-    public isValid(): boolean {
-        return (this.message === '!gif' || this.message.indexOf('!gif ') === 0);
+@autoInjectable()
+export default class GifChat extends AbstractChat {
+    constructor(chatClient: TwitchChatClient) {
+        super(chatClient);
     }
 
-    public async handle(): Promise<void> {
-        if (this.message === '!gif') {
-            this.chatSay(`Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
+    public isValid(message: string, user: string): boolean {
+        return (message === '!gif' || message.indexOf('!gif ') === 0);
+    }
+
+    public async handle(message: string, user: string): Promise<void> {
+        if (message === '!gif') {
+            this.say(`Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
             return;
         }
 
-        const searchPhrase = encodeURI(this.message.substring(5));
+        const searchPhrase = encodeURI(message.substring(5));
 
         const searchGifUseCase = new SearchGifUseCase(new TenorHttpClient());
         const gifUrl = await searchGifUseCase.execute(searchPhrase);

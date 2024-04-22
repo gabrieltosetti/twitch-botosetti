@@ -1,7 +1,9 @@
 import { RefreshingAuthProvider } from '@twurple/auth';
 import { promises as fs } from 'fs';
+import { singleton } from 'tsyringe';
 
-class AuthProvider {
+@singleton()
+export default class AuthProvider {
     private authProvider?: RefreshingAuthProvider;
 
     public async authenticate() {
@@ -24,5 +26,3 @@ class AuthProvider {
         return this.authProvider;
     }
 }
-
-export const authProvider = new AuthProvider();

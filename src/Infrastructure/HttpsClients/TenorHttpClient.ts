@@ -1,7 +1,7 @@
 import axios from "axios";
-import { TenorHttpClientInterface as TenorHttpClientInterface } from "../../Domain/HttpClients/TenorHttpClientInterface";
+import GifRepositoryInterface from "../../Domain/Repositories/GifRepositoryInterface";
 
-export class TenorHttpClient implements TenorHttpClientInterface {
+export default class TenorHttpClient implements GifRepositoryInterface {
     private apiKey: string;
     private baseUrl: string;
 
@@ -10,7 +10,7 @@ export class TenorHttpClient implements TenorHttpClientInterface {
         this.baseUrl = process.env.TENOR_URI || '';
     }
 
-    public async searchGifFromPhrase(searchPhrase: string, resultIndex: number): Promise<string> {
+    public async findByTitleWithPhrase(searchPhrase: string, resultIndex: number): Promise<string> {
         let response;
 
         try {

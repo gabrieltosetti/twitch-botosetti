@@ -1,18 +1,18 @@
-'use strict';
-
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
+import TwitchChatClient from "../../TwitchChatClient";
 
-export abstract class AbstractRedemption
-{
-    protected redemption: PubSubRedemptionMessage;
+export default abstract class AbstractRedemption {
     protected abstract rewardId: string;
 
-    public constructor(redemption: PubSubRedemptionMessage)
-    {
-        this.redemption = redemption;
+    constructor(
+        private chatClient: TwitchChatClient
+    ) { }
+
+    public abstract isValid(redemption: PubSubRedemptionMessage): boolean;
+
+    public abstract handle(redemption: PubSubRedemptionMessage): void;
+
+    protected say(message: string) {
+        return this.chatClient.getChatClient().say("GTosetti", message);
     }
-
-    public abstract isValid(): boolean;
-
-    public abstract handle(): void;
 }

@@ -1,23 +1,15 @@
-'use strict';
+import TwitchChatClient from "../../TwitchChatClient";
 
-import { chatClient } from "../../chatClient";
+export default abstract class AbstractChat {
+    public constructor(
+        private chatClient: TwitchChatClient
+    ) { }
 
-export abstract class AbstractChat {
-    protected message: string;
-    protected user: string;
-    protected channel: string;
+    public abstract isValid(message: string, user: string): boolean;
 
-    public constructor(message: string, user: string, channel: string) {
-        this.message = message;
-        this.user = user;
-        this.channel = channel;
-    }
+    public abstract handle(message: string, user: string): void;
 
-    public abstract isValid(): boolean;
-
-    public abstract handle(): void;
-
-    protected chatSay(message: string) {
-        return chatClient.getChatClient().say(this.channel, message);
+    protected say(message: string) {
+        return this.chatClient.getChatClient().say("GTosetti", message);
     }
 }
