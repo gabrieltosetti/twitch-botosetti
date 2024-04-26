@@ -2,7 +2,7 @@ import express from 'express';
 import { container } from "tsyringe";
 import ChatHandler from "../Domain/Events/Chat/ChatHandler";
 import ObsClient from "../Infrastructure/obs/ObsClient";
-import RedemptionHandler from "../Infrastructure/twitch/Events/Redemption/RedemptionHandler";
+import RedemptionHandler from "../Domain/Events/Redemption/RedemptionHandler";
 import Utils from "./Helpers/Utils";
 import ServiceProviders from "./config/ServiceProviders";
 import TwitchManager from '../Infrastructure/twitch/TwitchManager';

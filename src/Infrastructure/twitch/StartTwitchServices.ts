@@ -1,5 +1,5 @@
 import { autoInjectable } from 'tsyringe';
-import RedemptionHandler from "./Events/Redemption/RedemptionHandler";
+import RedemptionHandler from "../../Domain/Events/Redemption/RedemptionHandler";
 import ChatHandler from '../../Domain/Events/Chat/ChatHandler';
 
 @autoInjectable()

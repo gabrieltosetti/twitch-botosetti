@@ -3,6 +3,8 @@ import StreamManagerInterface from "../../Domain/Contracts/StreamManagerInterfac
 import AuthProvider from "./AuthProvider";
 import { ChatClient } from "@twurple/chat";
 import { PubSubClient, PubSubRedemptionMessage } from "@twurple/pubsub";
+import RedemptionMessageDTO from "../../Domain/DTOs/RedemptionMessageDTO";
+import RedemptionMessageDTOMapper from "../Mappers/DTOs/RedemptionMessageDTOMapper";
 
 @singleton()
 @autoInjectable()
@@ -63,13 +65,18 @@ export default class TwitchManager implements StreamManagerInterface {
         this.getChatClient().say(this.channelName, message);
     }
 
-    onRedemption(callback: (message: PubSubRedemptionMessage) => void): void {
-        this.getPubSubClient().onRedemption(this.geUserListenerId(), callback);
+    onRedemption(callback: (message: RedemptionMessageDTO) => void): void {
+        this.getPubSubClient()
+            .onRedemption(
+                this.geUserListenerId(),
+                (message: PubSubRedemptionMessage) => {
+                    callback(RedemptionMessageDTOMapper.fromPubSubRedemptionMessage(message))
+                }
+            );
     }
 
     onMessage(callback: (user: string, message: string) => void): void {
-        this.getChatClient().onMessage((channel, user, message) => {
-            callback(user, message);
-        });
+        this.getChatClient()
+            .onMessage((channel, user, message) => callback(user, message));
     }
 }
