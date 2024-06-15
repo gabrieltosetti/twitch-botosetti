@@ -1,7 +1,7 @@
 import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import RotateCameraUseCase from "../../../../Domain/UseCases/RotateCameraUseCase";
-import TwitchChatClient from "../../TwitchChatClient";
-import AbstractRedemption from "./AbstractRedemption";
+import RotateCameraUseCase from "../../../../../Domain/UseCases/RotateCameraUseCase";
+import TwitchChatClient from "../../../TwitchChatClient";
+import AbstractRedemption from ".././AbstractRedemption";
 import { autoInjectable } from "tsyringe";
 
 @autoInjectable()

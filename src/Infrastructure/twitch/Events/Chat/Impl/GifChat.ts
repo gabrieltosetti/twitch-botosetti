@@ -1,9 +1,9 @@
 import { autoInjectable } from "tsyringe";
-import Utils from "../../../../Application/Helpers/Utils";
-import AbstractChat from "./AbstractChat";
-import SearchGifUseCase from "../../../../Domain/UseCases/SearchGifUseCase";
-import TenorHttpClient from "../../../HttpsClients/TenorHttpClient";
-import TwitchChatClient from "../../TwitchChatClient";
+import Utils from "../../../../../Application/Helpers/Utils";
+import AbstractChat from ".././AbstractChat";
+import SearchGifUseCase from "../../../../../Domain/UseCases/SearchGifUseCase";
+import TenorHttpClient from "../../../../HttpsClients/TenorHttpClient";
+import TwitchChatClient from "../../../TwitchChatClient";
 
 @autoInjectable()
 export default class GifChat extends AbstractChat {
