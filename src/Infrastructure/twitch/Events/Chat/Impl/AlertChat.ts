@@ -6,6 +6,8 @@ import sound from "sound-play";
 
 @autoInjectable()
 export default class AlertChat extends AbstractChat {
+    private static readonly INTERVAL_TO_PLAY_SOUND_IN_MILI: number = Number(process.env.INTERVAL_TO_PLAY_SOUND_IN_MILI || 0);
+
     constructor(chatClient: TwitchChatClient) {
         super(chatClient);
     }
@@ -16,10 +18,10 @@ export default class AlertChat extends AbstractChat {
 
     public async handle(message: string, user: string): Promise<void> {
         const now = new Date();
-        const isNowGreaterThanEqualFiveMinutes = (now.getTime() - Utils.date.getTime()) >= 300000;
+        const shouldPlaySound = (now.getTime() - Utils.date.getTime()) >= AlertChat.INTERVAL_TO_PLAY_SOUND_IN_MILI;
         Utils.date = now;
 
-        if (!isNowGreaterThanEqualFiveMinutes) {
+        if (!shouldPlaySound) {
             return;
         }
 
