@@ -1,4 +1,5 @@
 import OBSWebSocket from 'obs-websocket-js';
+import type { JsonObject } from 'type-fest';
 import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface';
 import { singleton } from 'tsyringe';
 
@@ -26,19 +27,24 @@ export default class ObsClient implements ObsClientInterface {
         return this.obs;
     }
 
-    public async getsSceneItems(sceneName: string) {
-        console.log(await this.getObs().call(
+    private async getsSceneItems(sceneName: string) {
+        const items = await this.getObs().call(
             'GetSceneItemList',
-            {
-                sceneName
-            }
-            ));
+            {sceneName}
+        );
+        return items.sceneItems;
     }
 
     public async rotateCamera(rotation: number = 0) {
         let alignment = 0;
-        const cameraSourceId = 27;
-        const sceneName = process.env.SCENE_NAME || '';
+
+        const sceneName = await this.getActiveScene();
+        const cameraSourceId = await this.getCameraItemId(sceneName);
+
+        if (!cameraSourceId) {
+            console.error('Camera nao encontrada');
+            return;
+        }
 
         switch (rotation) {
             case 180:
@@ -51,16 +57,55 @@ export default class ObsClient implements ObsClientInterface {
                 throw new Error('Rodar camera, rotacao nao definida');
         }
 
-        await this.getObs().call(
-            'SetSceneItemTransform',
-            {
-                sceneName: sceneName,
-                sceneItemId: cameraSourceId,
-                sceneItemTransform: {
-                    rotation: rotation,
-                    alignment: alignment
-                },
-            }
+        try {
+            await this.getObs().call(
+                'SetSceneItemTransform',
+                {
+                    sceneName: sceneName,
+                    sceneItemId: cameraSourceId,
+                    sceneItemTransform: {
+                        rotation: rotation,
+                        alignment: alignment
+                    },
+                }
+            );
+        } catch (e) {
+            console.error('Error rotating camera: ', e);
+        }
+
+    }
+
+    private async getActiveScene(): Promise<string> {
+        const response = await this.getObs().call('GetCurrentProgramScene');
+        return response.sceneName;
+    }
+
+    private async getGroupItems(sceneUuid: string): Promise<JsonObject[]> {
+        const items = await this.getObs().call(
+            'GetGroupSceneItemList',
+            {sceneUuid}
         );
+        return items.sceneItems;
+    }
+
+    private async getCameraItemId(sceneName: string): Promise<number|undefined> {
+        const activeItems = await this.getsSceneItems(sceneName);
+
+        let activeCamera = activeItems
+            .filter((item: any) => item.inputKind === 'dshow_input')
+            .map((item: any) => Number(item.sceneItemId))
+            .shift();
+
+        if (activeCamera) {
+            return activeCamera;
+        }
+
+        return activeItems
+            .filter((item: any) => item.isGroup)
+            .map(async (item: any) => (await this.getGroupItems(item.sourceUuid))
+                .filter(groupItem => groupItem.inputKind === 'dshow_input')
+                .map(item => Number(item.sceneItemId))
+                .shift())
+            .shift();
     }
 }
