@@ -1,6 +1,6 @@
 import { singleton, autoInjectable } from 'tsyringe';
 import { ChatClient } from '@twurple/chat';
-import AuthProvider from './AuthProvider';
+import AuthProvider from './AuthProvider.ts';
 
 @singleton()
 @autoInjectable()
@@ -16,7 +16,7 @@ export default class TwitchChatClient {
     public async connect() {
         this.chatClient = new ChatClient({
             authProvider: this.authProvider.getAuthProvider(),
-            channels: [String(process.env.CHANNEL_NAME)]
+            channels: [String(Deno.env.get("CHANNEL_NAME"))]
         });
 
         await this.chatClient.connect();

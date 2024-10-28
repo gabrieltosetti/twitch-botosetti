@@ -1,12 +1,12 @@
 import { autoInjectable } from "tsyringe";
-import Utils from "../../../../../Application/Helpers/Utils";
-import AbstractChat from ".././AbstractChat";
-import TwitchChatClient from "../../../TwitchChatClient";
+import Utils from "../../../../../Application/Helpers/Utils.ts";
+import AbstractChat from ".././AbstractChat.ts";
+import TwitchChatClient from "../../../TwitchChatClient.ts";
 import sound from "sound-play";
 
 @autoInjectable()
 export default class AlertChat extends AbstractChat {
-    private static readonly INTERVAL_TO_PLAY_SOUND_IN_MILI: number = Number(process.env.INTERVAL_TO_PLAY_SOUND_IN_MILI || 0);
+    private static readonly INTERVAL_TO_PLAY_SOUND_IN_MILI: number = Number(Deno.env.get("INTERVAL_TO_PLAY_SOUND_IN_MILI") || 0);
 
     constructor(chatClient: TwitchChatClient) {
         super(chatClient);

@@ -1,9 +1,9 @@
 import { autoInjectable } from 'tsyringe';
-import TwitchPubSubClient from "./TwitchPubSubClient";
-import AuthProvider from './AuthProvider';
-import RedemptionHandler from "./Events/Redemption/RedemptionHandler";
-import TwitchChatClient from "./TwitchChatClient";
-import ChatHandler from "./Events/Chat/ChatHandler";
+import TwitchPubSubClient from "./TwitchPubSubClient.ts";
+import AuthProvider from './AuthProvider.ts';
+import RedemptionHandler from "./Events/Redemption/RedemptionHandler.ts";
+import TwitchChatClient from "./TwitchChatClient.ts";
+import ChatHandler from "./Events/Chat/ChatHandler.ts";
 
 @autoInjectable()
 export default class StartTwichServices {

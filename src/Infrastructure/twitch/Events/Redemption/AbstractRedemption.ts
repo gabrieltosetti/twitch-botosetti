@@ -1,5 +1,5 @@
-import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import TwitchChatClient from "../../TwitchChatClient";
+import { PubSubRedemptionMessage } from "@twurple/pubsub";
+import TwitchChatClient from "../../TwitchChatClient.ts";
 
 export default abstract class AbstractRedemption {
     protected abstract rewardId: string;

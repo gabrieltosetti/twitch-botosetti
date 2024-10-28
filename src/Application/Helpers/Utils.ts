@@ -1,5 +1,5 @@
 import { Response } from 'express';
-import * as path from 'path';
+import * as path from 'node:path';
 
 export default class Utils {
     static activeResponse: Response;
@@ -23,6 +23,6 @@ export default class Utils {
     }
 
     static getAudioFile(file: string): string {
-        return path.resolve(__dirname, '..', '..', '..', 'assets', 'audios', file);
+        return path.resolve(import.meta.dirname, '..', '..', '..', 'assets', 'audios', file);
     }
 }

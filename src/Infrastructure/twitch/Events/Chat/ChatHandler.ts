@@ -1,8 +1,8 @@
 import { autoInjectable } from 'tsyringe';
-import TwitchChatClient from "../../TwitchChatClient";
-import AbstractChat from "./AbstractChat";
-import GifChat from "./Impl/GifChat";
-import AlertChat from './Impl/AlertChat';
+import TwitchChatClient from "../../TwitchChatClient.ts";
+import AbstractChat from "./AbstractChat.ts";
+import GifChat from "./Impl/GifChat.ts";
+import AlertChat from './Impl/AlertChat.ts';
 
 @autoInjectable()
 export default class ChatHandler {

@@ -1,5 +1,5 @@
-import Utils from "../../Application/Helpers/Utils";
-import GifRepositoryInterface from "../Repositories/GifRepositoryInterface";
+import Utils from "../../Application/Helpers/Utils.ts";
+import GifRepositoryInterface from "../Repositories/GifRepositoryInterface.ts";
 
 export default class SearchGifUseCase {
     private trenorHttpClient: GifRepositoryInterface;

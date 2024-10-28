@@ -1,5 +1,5 @@
 import OBSWebSocket from 'obs-websocket-js';
-import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface';
+import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface.ts';
 import { singleton } from 'tsyringe';
 
 @singleton()
@@ -8,8 +8,8 @@ export default class ObsClient implements ObsClientInterface {
 
     public async connect() {
         this.obs = new OBSWebSocket();
-        const OBSWebSocketURL = process.env.OBS_WEBSOCKET_URL || '';
-        const OBSWebSocketPassword = process.env.OBS_WEBSOCKET_PASSWORD || '';
+        const OBSWebSocketURL = Deno.env.get("OBS_WEBSOCKET_URL") || '';
+        const OBSWebSocketPassword = Deno.env.get("OBS_WEBSOCKET_PASSWORD") || '';
 
         try {
             await this.obs.connect(OBSWebSocketURL, OBSWebSocketPassword); 
@@ -38,7 +38,7 @@ export default class ObsClient implements ObsClientInterface {
     public async rotateCamera(rotation: number = 0) {
         let alignment = 0;
         const cameraSourceId = 27;
-        const sceneName = process.env.SCENE_NAME || '';
+        const sceneName = Deno.env.get("SCENE_NAME") || '';
 
         switch (rotation) {
             case 180:

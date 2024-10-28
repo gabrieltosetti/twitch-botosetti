@@ -1,16 +1,16 @@
-require('dotenv').config();
+import "@std/dotenv/load";
 import 'reflect-metadata';
 import { container } from 'tsyringe';
-import StartTwichServices from './Infrastructure/twitch/StartTwitchServices';
-import express from 'express';
-import Utils from './Application/Helpers/Utils';
-import ObsClient from './Infrastructure/obs/ObsClient';
+import StartTwichServices from './Infrastructure/twitch/StartTwitchServices.ts';
+import express from 'npm:express';
+import Utils from './Application/Helpers/Utils.ts';
+import ObsClient from './Infrastructure/obs/ObsClient.ts';
 
 /** CLIENTS */
 container.registerSingleton<ObsClient>('ObsClientInterface', ObsClient);
 
-const viewsPath = __dirname + '/Application/views/';
-const PORT = process.env.PORT || 80;
+const viewsPath = import.meta.dirname + '/Application/views/';
+const PORT = Deno.env.get("PORT") || 80;
 
 const app = express();
 const router = express.Router();

@@ -1,10 +1,18 @@
 import { autoInjectable, inject } from "tsyringe";
-import ObsClientInterface from "../Contracts/ObsClientInterface";
+import ObsClientInterface from "../Contracts/ObsClientInterface.ts";
 
 @autoInjectable()
 export default class RotateCameraUseCase {
-    constructor(@inject("ObsClientInterface") private obsClient: ObsClientInterface)
-    { }
+
+    // TODO: Descobrir porque "constructor(@inject("ObsClientInterface") private obsClient: ObsClientInterface)"
+    // nao funciona mais
+    @inject("ObsClientInterface")
+    private obsClient: ObsClientInterface;
+
+    constructor(obsClient: ObsClientInterface)
+    {
+        this.obsClient = obsClient;
+    }
 
     public async execute(rotation: number) {
         await this.obsClient.rotateCamera(rotation);

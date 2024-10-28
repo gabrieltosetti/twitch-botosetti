@@ -1,13 +1,13 @@
 import axios from "axios";
-import GifRepositoryInterface from "../../Domain/Repositories/GifRepositoryInterface";
+import GifRepositoryInterface from "../../Domain/Repositories/GifRepositoryInterface.ts";
 
 export default class TenorHttpClient implements GifRepositoryInterface {
     private apiKey: string;
     private baseUrl: string;
 
     constructor() {
-        this.apiKey = process.env.TENOR_GIF_API_KEY || '';
-        this.baseUrl = process.env.TENOR_URI || '';
+        this.apiKey = Deno.env.get("TENOR_GIF_API_KEY") || '';
+        this.baseUrl = Deno.env.get("TENOR_URI") || '';
     }
 
     public async findByTitleWithPhrase(searchPhrase: string, resultIndex: number): Promise<string> {

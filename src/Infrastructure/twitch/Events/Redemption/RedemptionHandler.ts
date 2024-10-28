@@ -1,8 +1,8 @@
 import { autoInjectable } from 'tsyringe';
-import { PubSubRedemptionMessage } from "@twurple/pubsub/lib/messages/PubSubRedemptionMessage";
-import TwitchPubSubClient from "../../TwitchPubSubClient";
-import AbstractRedemption from "./AbstractRedemption";
-import RotateCameraRedemption from "./Impl/RotateCameraRedemption";
+import { PubSubRedemptionMessage } from "@twurple/pubsub";
+import TwitchPubSubClient from "../../TwitchPubSubClient.ts";
+import AbstractRedemption from "./AbstractRedemption.ts";
+import RotateCameraRedemption from "./Impl/RotateCameraRedemption.ts";
 
 @autoInjectable()
 export default class RedemptionHandler {

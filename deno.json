@@ -1,0 +1,12 @@
+{
+  "tasks": {
+    "dev": "deno run -A --watch src/index.ts"
+  },
+  "imports": {
+    "@oak/oak": "jsr:@oak/oak@^17.1.2",
+    "@std/dotenv": "jsr:@std/dotenv@^0.225.2"
+  },
+  "compilerOptions": {
+    "strict": true
+  }
+}
