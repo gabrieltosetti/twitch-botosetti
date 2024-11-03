@@ -7,28 +7,28 @@ import { AbstractChat } from ".././AbstractChat.ts";
 
 @injectable()
 export class GifChat extends AbstractChat {
-    constructor(
-        chatClient: TwitchChatClient
-    ) {
-        super(chatClient);
+  constructor(
+    chatClient: TwitchChatClient,
+  ) {
+    super(chatClient);
+  }
+
+  public isValid(message: string, _user: string): boolean {
+    return (message === "!gif" || message.indexOf("!gif ") === 0);
+  }
+
+  public async handle(message: string, _user: string): Promise<void> {
+    if (message === "!gif") {
+      this.say(`Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
+      return;
     }
 
-    public isValid(message: string, _user: string): boolean {
-        return (message === '!gif' || message.indexOf('!gif ') === 0);
-    }
+    const searchPhrase = encodeURI(message.substring(5));
 
-    public async handle(message: string, _user: string): Promise<void> {
-        if (message === '!gif') {
-            this.say(`Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
-            return;
-        }
+    const searchGifUseCase = new SearchGifUseCase(new TenorHttpClient());
+    const gifUrl = await searchGifUseCase.execute(searchPhrase);
 
-        const searchPhrase = encodeURI(message.substring(5));
-
-        const searchGifUseCase = new SearchGifUseCase(new TenorHttpClient());
-        const gifUrl = await searchGifUseCase.execute(searchPhrase);
-
-        console.debug(gifUrl);
-        Utils.responseWrite(gifUrl);
-    }
+    console.debug(gifUrl);
+    Utils.responseWrite(gifUrl);
+  }
 }

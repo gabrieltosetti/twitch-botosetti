@@ -33,5 +33,4 @@ container.bind(AlertChat).toSelf();
 container.bind(RotateCameraRedemption).toSelf();
 container.bind(RotateCameraUseCase).toSelf();
 
-
 export default container;

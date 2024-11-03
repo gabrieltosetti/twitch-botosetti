@@ -6,27 +6,27 @@ import { AbstractChat } from ".././AbstractChat.ts";
 
 @injectable()
 export class AlertChat extends AbstractChat {
-    private static readonly INTERVAL_TO_PLAY_SOUND_IN_MILI: number = Number(Deno.env.get("INTERVAL_TO_PLAY_SOUND_IN_MILI") || 0);
+  private static readonly INTERVAL_TO_PLAY_SOUND_IN_MILI: number = Number(Deno.env.get("INTERVAL_TO_PLAY_SOUND_IN_MILI") || 0);
 
-    constructor(
-        chatClient: TwitchChatClient
-    ) {
-        super(chatClient);
+  constructor(
+    chatClient: TwitchChatClient,
+  ) {
+    super(chatClient);
+  }
+
+  public isValid(_message: string, _user: string): boolean {
+    return true;
+  }
+
+  public handle(_message: string, _user: string): void {
+    const now = new Date();
+    const shouldPlaySound = (now.getTime() - Utils.date.getTime()) >= AlertChat.INTERVAL_TO_PLAY_SOUND_IN_MILI;
+    Utils.date = now;
+
+    if (!shouldPlaySound) {
+      return;
     }
 
-    public isValid(_message: string, _user: string): boolean {
-        return true;
-    }
-
-    public handle(_message: string, _user: string): void {
-        const now = new Date();
-        const shouldPlaySound = (now.getTime() - Utils.date.getTime()) >= AlertChat.INTERVAL_TO_PLAY_SOUND_IN_MILI;
-        Utils.date = now;
-
-        if (!shouldPlaySound) {
-            return;
-        }
-
-        sound.play(Utils.getAudioFile('vine-boom.mp3'));
-    }
+    sound.play(Utils.getAudioFile("vine-boom.mp3"));
+  }
 }

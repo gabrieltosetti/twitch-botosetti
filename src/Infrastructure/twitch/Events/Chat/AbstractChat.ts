@@ -3,15 +3,15 @@ import { injectable } from "inversify";
 
 @injectable()
 export abstract class AbstractChat {
-    public constructor(
-        private chatClient: TwitchChatClient
-    ) { }
+  public constructor(
+    private chatClient: TwitchChatClient,
+  ) {}
 
-    public abstract isValid(message: string, user: string): boolean;
+  public abstract isValid(message: string, user: string): boolean;
 
-    public abstract handle(message: string, user: string): void;
+  public abstract handle(message: string, user: string): void;
 
-    protected say(message: string) {
-        return this.chatClient.getChatClient().say("GTosetti", message);
-    }
+  protected say(message: string) {
+    return this.chatClient.getChatClient().say("GTosetti", message);
+  }
 }

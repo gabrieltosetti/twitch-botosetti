@@ -5,32 +5,32 @@ import { inject, injectable } from "inversify";
 
 @injectable()
 export class SearchGifUseCase {
-    private static currentIndex: number = 1;
+  private static currentIndex: number = 1;
 
-    constructor(
-        @inject(TYPES.GifRepositoryInterface) private trenorHttpClient: GifRepositoryInterface,
-    ) {}
+  constructor(
+    @inject(TYPES.GifRepositoryInterface) private trenorHttpClient: GifRepositoryInterface,
+  ) {}
 
-    public async execute(searchPhrase: string): Promise<string> {
-        const gifUrl = await this.trenorHttpClient.findByTitleWithPhrase(
-            searchPhrase,
-            this.getRandomGifIndex(),
-        );
+  public async execute(searchPhrase: string): Promise<string> {
+    const gifUrl = await this.trenorHttpClient.findByTitleWithPhrase(
+      searchPhrase,
+      this.getRandomGifIndex(),
+    );
 
-        if (!gifUrl) {
-            throw new Error("Gif not found");
-        }
-
-        return gifUrl;
+    if (!gifUrl) {
+      throw new Error("Gif not found");
     }
 
-    private getRandomGifIndex(): number {
-        const randomIndex = Utils.getRandomInt(1, 8);
+    return gifUrl;
+  }
 
-        if (randomIndex === SearchGifUseCase.currentIndex) {
-            return this.getRandomGifIndex();
-        }
+  private getRandomGifIndex(): number {
+    const randomIndex = Utils.getRandomInt(1, 8);
 
-        return SearchGifUseCase.currentIndex = randomIndex;
+    if (randomIndex === SearchGifUseCase.currentIndex) {
+      return this.getRandomGifIndex();
     }
+
+    return SearchGifUseCase.currentIndex = randomIndex;
+  }
 }
