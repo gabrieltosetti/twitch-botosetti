@@ -1,12 +1,12 @@
-import { autoInjectable } from 'tsyringe';
-import TwitchPubSubClient from "./TwitchPubSubClient.ts";
-import AuthProvider from './AuthProvider.ts';
-import RedemptionHandler from "./Events/Redemption/RedemptionHandler.ts";
-import TwitchChatClient from "./TwitchChatClient.ts";
-import ChatHandler from "./Events/Chat/ChatHandler.ts";
+import { injectable } from "inversify";
+import { AuthProvider } from './AuthProvider.ts';
+import { ChatHandler } from "./Events/Chat/ChatHandler.ts";
+import { RedemptionHandler } from "./Events/Redemption/RedemptionHandler.ts";
+import { TwitchChatClient } from "./TwitchChatClient.ts";
+import { TwitchPubSubClient } from "./TwitchPubSubClient.ts";
 
-@autoInjectable()
-export default class StartTwichServices {
+@injectable()
+export class StartTwichServices {
     constructor(
         private authProvider: AuthProvider,
         private twitchPubSubClient: TwitchPubSubClient,

@@ -1,8 +1,8 @@
 import { RefreshingAuthProvider } from '@twurple/auth';
-import { singleton } from 'tsyringe';
+import { injectable } from "inversify";
 
-@singleton()
-export default class AuthProvider {
+@injectable()
+export class AuthProvider {
     private authProvider?: RefreshingAuthProvider;
 
     public async authenticate() {

@@ -1,11 +1,11 @@
-import { autoInjectable } from 'tsyringe';
-import TwitchChatClient from "../../TwitchChatClient.ts";
-import AbstractChat from "./AbstractChat.ts";
-import GifChat from "./Impl/GifChat.ts";
-import AlertChat from './Impl/AlertChat.ts';
+import { injectable } from "inversify";
+import { TwitchChatClient } from "../../TwitchChatClient.ts";
+import { AbstractChat } from "./AbstractChat.ts";
+import { AlertChat } from './Impl/AlertChat.ts';
+import { GifChat } from "./Impl/GifChat.ts";
 
-@autoInjectable()
-export default class ChatHandler {
+@injectable()
+export class ChatHandler {
     constructor(
         private chatClient: TwitchChatClient,
         private gifChat: GifChat,

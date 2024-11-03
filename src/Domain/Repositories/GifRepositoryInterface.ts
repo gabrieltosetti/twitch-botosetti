@@ -1,3 +1,3 @@
-export default interface GifRepositoryInterface {
+export interface GifRepositoryInterface {
     findByTitleWithPhrase(searchPhrase: string, resultIndex: number): Promise<string>;
 }

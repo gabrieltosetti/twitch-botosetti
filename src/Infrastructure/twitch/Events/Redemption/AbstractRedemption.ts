@@ -1,7 +1,9 @@
 import { PubSubRedemptionMessage } from "@twurple/pubsub";
-import TwitchChatClient from "../../TwitchChatClient.ts";
+import { injectable } from "inversify";
+import { TwitchChatClient } from "../../TwitchChatClient.ts";
 
-export default abstract class AbstractRedemption {
+@injectable()
+export abstract class AbstractRedemption {
     protected abstract rewardId: string;
 
     constructor(

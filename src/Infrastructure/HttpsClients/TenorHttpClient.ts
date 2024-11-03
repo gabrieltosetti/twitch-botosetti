@@ -1,7 +1,9 @@
 import axios from "axios";
-import GifRepositoryInterface from "../../Domain/Repositories/GifRepositoryInterface.ts";
+import { injectable } from "inversify";
+import { GifRepositoryInterface } from "../../Domain/Repositories/GifRepositoryInterface.ts";
 
-export default class TenorHttpClient implements GifRepositoryInterface {
+@injectable()
+export class TenorHttpClient implements GifRepositoryInterface {
     private apiKey: string;
     private baseUrl: string;
 

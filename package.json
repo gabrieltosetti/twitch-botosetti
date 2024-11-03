@@ -19,8 +19,7 @@
     "inversify": "^6.0.3",
     "obs-websocket-js": "~5.0.2",
     "reflect-metadata": "^0.2.2",
-    "sound-play": "^1.1.0",
-    "tsyringe": "^4.8.0"
+    "sound-play": "^1.1.0"
   },
   "devDependencies": {
     "@types/express": "~4.17.14",

@@ -1,7 +1,7 @@
 import * as path from 'node:path';
 
-export default class Utils {
-    static activeResponse: WebSocket;
+export class Utils {
+    static currentWebSocket: WebSocket;
     static date: Date = new Date("2021-01-01T00:00:00Z");
 
     /**
@@ -17,11 +17,15 @@ export default class Utils {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    static responseWrite(data: string) {
-        this.activeResponse.send(`data: ${data}\n\n`);
+    static responseWrite(text: string) {
+        this.currentWebSocket.send(text);
     }
 
     static getAudioFile(file: string): string {
-        return path.resolve(Deno.cwd(), '..', '..', '..', 'assets', 'audios', file);
+        return path.resolve(Deno.cwd(), '..', 'assets', 'audios', file);
+    }
+
+    static viewsPath(): string {
+        return path.resolve(Deno.cwd(), 'src', 'Application', 'views');
     }
 }

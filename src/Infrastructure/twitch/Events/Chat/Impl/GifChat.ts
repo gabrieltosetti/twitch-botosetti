@@ -1,13 +1,15 @@
-import { autoInjectable } from "tsyringe";
-import Utils from "../../../../../Application/Helpers/Utils.ts";
-import AbstractChat from ".././AbstractChat.ts";
-import SearchGifUseCase from "../../../../../Domain/UseCases/SearchGifUseCase.ts";
-import TenorHttpClient from "../../../../HttpsClients/TenorHttpClient.ts";
-import TwitchChatClient from "../../../TwitchChatClient.ts";
+import { injectable } from "inversify";
+import { Utils } from "../../../../../Application/Helpers/Utils.ts";
+import { SearchGifUseCase } from "../../../../../Domain/UseCases/SearchGifUseCase.ts";
+import { TenorHttpClient } from "../../../../HttpsClients/TenorHttpClient.ts";
+import { TwitchChatClient } from "../../../TwitchChatClient.ts";
+import { AbstractChat } from ".././AbstractChat.ts";
 
-@autoInjectable()
-export default class GifChat extends AbstractChat {
-    constructor(chatClient: TwitchChatClient) {
+@injectable()
+export class GifChat extends AbstractChat {
+    constructor(
+        chatClient: TwitchChatClient
+    ) {
         super(chatClient);
     }
 

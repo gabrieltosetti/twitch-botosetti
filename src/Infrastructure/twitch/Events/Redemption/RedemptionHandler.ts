@@ -1,11 +1,12 @@
-import { autoInjectable } from 'tsyringe';
-import { PubSubRedemptionMessage } from "@twurple/pubsub";
-import TwitchPubSubClient from "../../TwitchPubSubClient.ts";
-import AbstractRedemption from "./AbstractRedemption.ts";
-import RotateCameraRedemption from "./Impl/RotateCameraRedemption.ts";
 
-@autoInjectable()
-export default class RedemptionHandler {
+import { PubSubRedemptionMessage } from "@twurple/pubsub";
+import { injectable } from "inversify";
+import { TwitchPubSubClient } from "../../TwitchPubSubClient.ts";
+import { AbstractRedemption } from "./AbstractRedemption.ts";
+import { RotateCameraRedemption } from "./Impl/RotateCameraRedemption.ts";
+
+@injectable()
+export class RedemptionHandler {
     constructor(
         private pubSubClient: TwitchPubSubClient,
         private rotateCameraRedemption: RotateCameraRedemption

@@ -1,18 +1,20 @@
-import Utils from "../../Application/Helpers/Utils.ts";
-import GifRepositoryInterface from "../Repositories/GifRepositoryInterface.ts";
+import { TYPES } from "../../Application/Configs/Types.ts";
+import { Utils } from "../../Application/Helpers/Utils.ts";
+import type { GifRepositoryInterface } from "../Repositories/GifRepositoryInterface.ts";
+import { inject, injectable } from "inversify";
 
-export default class SearchGifUseCase {
-    private trenorHttpClient: GifRepositoryInterface;
+@injectable()
+export class SearchGifUseCase {
     private static currentIndex: number = 1;
 
-    constructor(trenorHttpClient: GifRepositoryInterface) {
-        this.trenorHttpClient = trenorHttpClient;
-    }
+    constructor(
+        @inject(TYPES.GifRepositoryInterface) private trenorHttpClient: GifRepositoryInterface,
+    ) {}
 
     public async execute(searchPhrase: string): Promise<string> {
         const gifUrl = await this.trenorHttpClient.findByTitleWithPhrase(
             searchPhrase,
-            this.getRandomGifIndex()
+            this.getRandomGifIndex(),
         );
 
         if (!gifUrl) {
@@ -23,9 +25,11 @@ export default class SearchGifUseCase {
     }
 
     private getRandomGifIndex(): number {
-        let randomIndex = Utils.getRandomInt(1, 8);
+        const randomIndex = Utils.getRandomInt(1, 8);
 
-        if (randomIndex === SearchGifUseCase.currentIndex) return this.getRandomGifIndex();
+        if (randomIndex === SearchGifUseCase.currentIndex) {
+            return this.getRandomGifIndex();
+        }
 
         return SearchGifUseCase.currentIndex = randomIndex;
     }

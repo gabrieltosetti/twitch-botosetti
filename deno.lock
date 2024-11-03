@@ -32,7 +32,6 @@
     "npm:reflect-metadata@~0.2.2": "0.2.2",
     "npm:sound-play@^1.1.0": "1.1.0",
     "npm:ts-node-dev@2.0": "2.0.0_typescript@4.8.4",
-    "npm:tsyringe@^4.8.0": "4.8.0",
     "npm:typescript@~4.8.4": "4.8.4"
   },
   "jsr": {
@@ -106,7 +105,7 @@
       "integrity": "sha512-JmM9OyZY+nNRRsW+bS3i+PSjmXiR3BCBiyHjjvpTWhS373xYtNdWbzxPDtKu2SWpE2lpnGP0QwINe3Uo5BBxDw==",
       "dependencies": [
         "@d-fischer/shared-utils",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@d-fischer/connection@6.7.0_ws@8.18.0": {
@@ -118,7 +117,7 @@
         "@d-fischer/typed-event-emitter",
         "@types/node@16.18.115",
         "@types/ws",
-        "tslib@2.8.0",
+        "tslib",
         "ws"
       ]
     },
@@ -131,7 +130,7 @@
         "@d-fischer/typed-event-emitter",
         "@types/node@16.18.115",
         "@types/ws",
-        "tslib@2.8.0",
+        "tslib",
         "ws"
       ]
     },
@@ -161,7 +160,7 @@
       "dependencies": [
         "@d-fischer/detect-node",
         "@d-fischer/shared-utils",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@d-fischer/promise.allsettled@2.0.2": {
@@ -185,7 +184,7 @@
         "@d-fischer/promise.allsettled",
         "@d-fischer/shared-utils",
         "@types/node@12.20.55",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@d-fischer/raw-body@2.4.3": {
@@ -200,13 +199,13 @@
     "@d-fischer/shared-utils@3.6.3": {
       "integrity": "sha512-Lz+Qk1WJLVoeREOHPZcIDTHOoxecxMSG2sq+x1xWYCH1exqiMKMMx06pXdy15UzHG7ohvQRNXk2oHqZ9EOl9jQ==",
       "dependencies": [
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@d-fischer/typed-event-emitter@3.3.3": {
       "integrity": "sha512-OvSEOa8icfdWDqcRtjSEZtgJTFOFNgTjje7zaL0+nAtu2/kZtRCSK5wUMrI/aXtCH8o0Qz2vA8UqkhWUTARFQQ==",
       "dependencies": [
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@jridgewell/resolve-uri@3.1.2": {
@@ -245,7 +244,7 @@
         "@d-fischer/shared-utils",
         "@twurple/common",
         "@types/node-fetch",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/api@5.2.7_@twurple+auth@5.2.7": {
@@ -259,7 +258,7 @@
         "@twurple/api-call",
         "@twurple/auth",
         "@twurple/common",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/auth@5.2.7": {
@@ -269,7 +268,7 @@
         "@d-fischer/shared-utils",
         "@twurple/api-call",
         "@twurple/common",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/chat@5.2.7_@twurple+auth@5.2.7": {
@@ -284,7 +283,7 @@
         "@twurple/auth",
         "@twurple/common",
         "ircv3",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/common@5.3.4": {
@@ -292,7 +291,7 @@
       "dependencies": [
         "@d-fischer/shared-utils",
         "klona",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/eventsub@5.2.7_@twurple+api@5.2.7__@twurple+auth@5.2.7_@twurple+auth@5.2.7": {
@@ -307,7 +306,7 @@
         "@twurple/common",
         "@types/express-serve-static-core",
         "httpanda",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@twurple/pubsub@5.2.7_@twurple+auth@5.2.7": {
@@ -319,7 +318,7 @@
         "@d-fischer/typed-event-emitter",
         "@twurple/auth",
         "@twurple/common",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "@types/body-parser@1.19.5": {
@@ -1041,7 +1040,7 @@
       "integrity": "sha512-NieTiR7kfOheL9OeEi6+JKFmJ2JP9ZRqUQ4tiXZ9J+EMMKxApHUQlEM5l4gZ+l67lxE9Er6oigZnujmhlodNCg==",
       "dependencies": [
         "@types/node@14.18.63",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "iconv-lite@0.4.24": {
@@ -1087,7 +1086,7 @@
         "@d-fischer/typed-event-emitter",
         "@types/node@14.18.63",
         "klona",
-        "tslib@2.8.0"
+        "tslib"
       ]
     },
     "is-arguments@1.1.1": {
@@ -1726,17 +1725,8 @@
         "strip-json-comments"
       ]
     },
-    "tslib@1.14.1": {
-      "integrity": "sha512-Xni35NKzjgMrwevysHTCArtLDpPvye8zV/0E4EyYn43P7/7qvQwPh9BGkHewbMulVntbigmcT7rdX3BNo9wRJg=="
-    },
     "tslib@2.8.0": {
       "integrity": "sha512-jWVzBLplnCmoaTr13V9dYbiQ99wvZRd0vNWaDRg+aVYRcjDF3nDksxFDE/+fkXnKhpnUUkmx5pK/v8mCtLVqZA=="
-    },
-    "tsyringe@4.8.0": {
-      "integrity": "sha512-YB1FG+axdxADa3ncEtRnQCFq/M0lALGLxSZeVNbTU8NqhOVc51nnv2CISTcvc1kyv6EGPtXVr0v6lWeDxiijOA==",
-      "dependencies": [
-        "tslib@1.14.1"
-      ]
     },
     "type-fest@3.13.1": {
       "integrity": "sha512-tLq3bSNx+xSpwvAJnzrK0Ep5CLNWjvFTOp71URMaAEWBfRb9nnJiBoUe0tF8bI4ZFO3omgBR6NvnbzVUT3Ly4g=="
@@ -1930,7 +1920,6 @@
         "npm:reflect-metadata@~0.2.2",
         "npm:sound-play@^1.1.0",
         "npm:ts-node-dev@2.0",
-        "npm:tsyringe@^4.8.0",
         "npm:typescript@~4.8.4"
       ]
     }

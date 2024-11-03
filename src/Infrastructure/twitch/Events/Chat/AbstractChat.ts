@@ -1,6 +1,8 @@
-import TwitchChatClient from "../../TwitchChatClient.ts";
+import { TwitchChatClient } from "../../TwitchChatClient.ts";
+import { injectable } from "inversify";
 
-export default abstract class AbstractChat {
+@injectable()
+export abstract class AbstractChat {
     public constructor(
         private chatClient: TwitchChatClient
     ) { }

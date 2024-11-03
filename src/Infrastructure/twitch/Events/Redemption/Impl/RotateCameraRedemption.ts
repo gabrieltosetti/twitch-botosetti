@@ -1,11 +1,11 @@
 import { PubSubRedemptionMessage } from "@twurple/pubsub";
-import RotateCameraUseCase from "../../../../../Domain/UseCases/RotateCameraUseCase.ts";
-import TwitchChatClient from "../../../TwitchChatClient.ts";
-import AbstractRedemption from ".././AbstractRedemption.ts";
-import { autoInjectable } from "tsyringe";
+import { injectable } from "inversify";
+import { RotateCameraUseCase } from "../../../../../Domain/UseCases/RotateCameraUseCase.ts";
+import { TwitchChatClient } from "../../../TwitchChatClient.ts";
+import { AbstractRedemption } from ".././AbstractRedemption.ts";
 
-@autoInjectable()
-export default class RotateCameraRedemption extends AbstractRedemption {
+@injectable()
+export class RotateCameraRedemption extends AbstractRedemption {
     protected rewardId: string = '3c546d54-0cab-4404-9455-b5b8138bd0c0';
 
     constructor(

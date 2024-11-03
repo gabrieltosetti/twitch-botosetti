@@ -1,9 +1,9 @@
+import { injectable } from "inversify";
 import OBSWebSocket from 'obs-websocket-js';
-import ObsClientInterface from '../../Domain/Contracts/ObsClientInterface.ts';
-import { singleton } from 'tsyringe';
+import { ObsClientInterface } from '../../Domain/Contracts/ObsClientInterface.ts';
 
-@singleton()
-export default class ObsClient implements ObsClientInterface {
+@injectable()
+export class ObsClient implements ObsClientInterface {
     private obs?: OBSWebSocket;
 
     public async connect() {
@@ -12,7 +12,7 @@ export default class ObsClient implements ObsClientInterface {
         const OBSWebSocketPassword = Deno.env.get("OBS_WEBSOCKET_PASSWORD") || '';
 
         try {
-            await this.obs.connect(OBSWebSocketURL, OBSWebSocketPassword); 
+            await this.obs.connect(OBSWebSocketURL, OBSWebSocketPassword);
         } catch (e) {
             console.error('Error conecting OBS Websocket: ', e);
             return;
