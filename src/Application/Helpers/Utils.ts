@@ -1,8 +1,7 @@
-import { Response } from 'express';
 import * as path from 'node:path';
 
 export default class Utils {
-    static activeResponse: Response;
+    static activeResponse: WebSocket;
     static date: Date = new Date("2021-01-01T00:00:00Z");
 
     /**
@@ -18,11 +17,11 @@ export default class Utils {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    static responseWrite(data: any) {
-        this.activeResponse.write(`data: ${data}\n\n`);
+    static responseWrite(data: string) {
+        this.activeResponse.send(`data: ${data}\n\n`);
     }
 
     static getAudioFile(file: string): string {
-        return path.resolve(import.meta.dirname, '..', '..', '..', 'assets', 'audios', file);
+        return path.resolve(Deno.cwd(), '..', '..', '..', 'assets', 'audios', file);
     }
 }

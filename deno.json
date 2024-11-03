@@ -7,6 +7,9 @@
     "@std/dotenv": "jsr:@std/dotenv@^0.225.2"
   },
   "compilerOptions": {
-    "strict": true
+    "strict": true,
+    "types": ["reflect-metadata"],
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
   }
 }

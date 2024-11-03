@@ -3,10 +3,7 @@
   "version": "1.0.0",
   "description": "Node.js on Docker",
   "author": "First Last <first.last@example.com>",
-  "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "ts-node-dev src/index.ts",
     "start-stardewvalley": "ts-node-dev src/Runners/StardewValleyRunner.ts",
     "build": "tsc && copyfiles -u 1 src/**/*.html out/ && copyfiles -u 1 src/**/*.css out/"
   },
@@ -19,6 +16,7 @@
     "axios": "~1.1.3",
     "dotenv": "~16.0.3",
     "express": "~4.18.2",
+    "inversify": "^6.0.3",
     "obs-websocket-js": "~5.0.2",
     "reflect-metadata": "^0.2.2",
     "sound-play": "^1.1.0",
