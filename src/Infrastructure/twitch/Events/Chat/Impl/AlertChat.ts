@@ -1,5 +1,5 @@
 import { injectable } from "inversify";
-import sound from "sound-play";
+import sound from "npm:sound-play";
 import { Utils } from "../../../../../Application/Helpers/Utils.ts";
 import { TwitchChatClient } from "../../../TwitchChatClient.ts";
 import { AbstractChat } from ".././AbstractChat.ts";
@@ -14,11 +14,11 @@ export class AlertChat extends AbstractChat {
         super(chatClient);
     }
 
-    public isValid(message: string, user: string): boolean {
+    public isValid(_message: string, _user: string): boolean {
         return true;
     }
 
-    public async handle(message: string, user: string): Promise<void> {
+    public handle(_message: string, _user: string): void {
         const now = new Date();
         const shouldPlaySound = (now.getTime() - Utils.date.getTime()) >= AlertChat.INTERVAL_TO_PLAY_SOUND_IN_MILI;
         Utils.date = now;

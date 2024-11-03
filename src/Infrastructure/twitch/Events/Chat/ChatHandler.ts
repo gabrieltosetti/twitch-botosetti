@@ -13,10 +13,10 @@ export class ChatHandler {
     ) { }
 
     public register(): void {
-        this.chatClient.getChatClient().onMessage((channel: string, user: string, message: string) => {
+        this.chatClient.getChatClient().onMessage((_channel: string, user: string, message: string) => {
             console.log('chat:', message);
 
-            for (let chatCommand of this.getEventClass()) {
+            for (const chatCommand of this.getEventClass()) {
                 if (chatCommand.isValid(message, user)) chatCommand.handle(message, user);
             }
         });

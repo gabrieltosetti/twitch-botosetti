@@ -13,11 +13,11 @@ export class GifChat extends AbstractChat {
         super(chatClient);
     }
 
-    public isValid(message: string, user: string): boolean {
+    public isValid(message: string, _user: string): boolean {
         return (message === '!gif' || message.indexOf('!gif ') === 0);
     }
 
-    public async handle(message: string, user: string): Promise<void> {
+    public async handle(message: string, _user: string): Promise<void> {
         if (message === '!gif') {
             this.say(`Pesquise por qualquer gif! Use !gif <nome do gif>. Por exemplo: !gif rocket league`);
             return;

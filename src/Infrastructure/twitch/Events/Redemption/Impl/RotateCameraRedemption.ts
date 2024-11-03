@@ -20,7 +20,7 @@ export class RotateCameraRedemption extends AbstractRedemption {
         return redemption.rewardId === this.rewardId;
     }
 
-    public handle(redemption: PubSubRedemptionMessage): void {
+    public handle(_redemption: PubSubRedemptionMessage): void {
         console.log('reward rodar camera');
 
         this.rotateCameraUseCase.execute(180);

@@ -14,7 +14,7 @@ export class RedemptionHandler {
 
     public register() {
         this.pubSubClient.onRedemption((redemption: PubSubRedemptionMessage) => {
-            for (let chatCommand of this.getEventClass()) {
+            for (const chatCommand of this.getEventClass()) {
                 if (chatCommand.isValid(redemption)) chatCommand.handle(redemption);
             }
         });
